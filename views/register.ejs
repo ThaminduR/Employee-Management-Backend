@@ -1,0 +1,62 @@
+<html>
+    <body>
+        <div class="form">
+            <div class="tab-content">
+                <div id="signup">
+                    <h1>Sign Up</h1>
+                    <form action="/user/register" method="post">
+                            <div class="field-wrap">
+                                <label>
+                                    First Name<span class="req">*</span>
+                                </label>
+                                <input type="text" name="first_name" required autocomplete="off" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Last Name<span class="req">*</span>
+                                </label>
+                                <input type="text" name="last_name" required autocomplete="off" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Marital Status <span class="req">*</span>
+                                </label>
+                                <input type="text" name="marital_status" required autocomplete="off" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Birthday <span class="req">*</span>
+                                </label>
+                                <input type="text" name="birthday" required autocomplete="off" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Address <span class="req">*</span>
+                                </label>
+                                <input type="text" name="address" required autocomplete="off" />
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Contact Num <span class="req">*</span>
+                                </label>
+                                <input type="text" name="contact_num" required autocomplete="off" />
+                            </div>
+                        <div class="field-wrap">
+                            <label>
+                                Clearance Level<span class="req">*</span>
+                            </label>
+                            <input type="number" name='clearance_level' required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap">
+                            <label>
+                                Set A Password<span class="req">*</span>
+                            </label>
+                            <input type="password" name='password' required autocomplete="off" />
+                        </div>
+                        <button type="submit"  class="button button-block">Get Started</button>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- /form -->
+    </body>
+</html> 

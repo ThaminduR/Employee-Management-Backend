@@ -1,0 +1,31 @@
+ <html>
+    <body>
+         <div id="login">
+            <h1>Employee Management</h1>
+
+            <p ><a href="/register">Not a member? Sign Up </a></p>
+            <form action="/user/login" method="post">
+
+                <div class="field-wrap">
+                    <label>
+                        User ID<span class="req">*</span>
+                    </label>
+                    <input type="text" name='user_id' required autocomplete="off" />
+                </div>
+
+                <div class="field-wrap">
+                    <label>
+                        Password<span class="req">*</span>
+                    </label>
+                    <input type="password" name='password' required autocomplete="off" />
+                </div>
+
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                <button type=sumbit class="button button-block">Log In</button>
+
+            </form>
+
+        </div>
+    </body>
+</html>

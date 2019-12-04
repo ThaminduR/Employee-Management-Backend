@@ -8,7 +8,11 @@
     
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
-                    <th scope="col">City</th>
+                    <th scope="col">Marital Status</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Contact Num</th>
+                    
     
                 </tr>
             </thead>
@@ -16,9 +20,12 @@
             <% users.forEach(function(user, index){ %>
                 <tr>
                     <th scope="row"><%= user.user_id %></th>
-                    <td><%= user.first_name %></td>
-                    <td><%= user.last_name %></td>
-                    <td><%= user.city %></td>
+                    <td><%= user.firstname %></td>
+                    <td><%= user.lastname %></td>
+                    <td><%= user.marital_status %></td>
+                    <td><%= user.birthday %></td>
+                    <td><%= user.address %></td>
+                    <td><%= user.contact_num %></td>
     
                     <td>
                         <a href="/edit/<%= user.user_id %>" target="_blank" rel="noopener"
