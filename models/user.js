@@ -8,7 +8,7 @@ exports.getusers = function (res) {
         if (err) {
             res.redirect('/');
         }
-        res.render('index.ejs', {
+        res.render('users.ejs', {
             title: 'All Users',
             users: result
         });

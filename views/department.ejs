@@ -1,0 +1,30 @@
+<%- include('partial/header') -%>
+<div class="table-wrapper">
+    <% if (users.length > 0) {%>
+        <table class="table table-hovered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Department ID</th>
+                    <th scope="col">Department Name</th>
+                    <th scope="col">Number of Employees</th>                    
+                </tr>
+            </thead>
+            <tbody>
+            <% users.forEach(function(user, index){ %>
+                <tr>
+                    <th scope="row"><%= user.user_id %></th>
+                    <td><%= user.d_id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.number_of_employees %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <% } else { %>
+        <p class="text-center">No departments found.</p>
+        <% } %>
+</div>
+</div>
+</body>
+
+</html>

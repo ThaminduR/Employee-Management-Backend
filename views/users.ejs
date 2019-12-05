@@ -26,18 +26,12 @@
                     <td><%= user.birthday %></td>
                     <td><%= user.address %></td>
                     <td><%= user.contact_num %></td>
-    
-                    <td>
-                        <a href="/edit/<%= user.user_id %>" target="_blank" rel="noopener"
-                            class="btn btn-sm btn-success">Edit</a>
-                        <a href="/delete/<%= user.user_id %>" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
                 </tr>
                 <% }) %>
             </tbody>
         </table>
         <% } else { %>
-        <p class="text-center">No users found. Go <a href="/add">here</a> to add users.</p>
+        <p class="text-center">No users found.</p>
         <% } %>
 </div>
 </div>
