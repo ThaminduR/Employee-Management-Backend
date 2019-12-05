@@ -1,6 +1,6 @@
 <%- include('partial/header') -%>
 <div class="table-wrapper">
-    <% if (users.length > 0) {%>
+    <% if (departments.length > 0) {%>
         <table class="table table-hovered">
             <thead class="thead-dark">
                 <tr>
@@ -10,12 +10,11 @@
                 </tr>
             </thead>
             <tbody>
-            <% users.forEach(function(user, index){ %>
+            <% departments.forEach(function(department, index){ %>
                 <tr>
-                    <th scope="row"><%= user.user_id %></th>
-                    <td><%= user.d_id %></td>
-                    <td><%= user.name %></td>
-                    <td><%= user.number_of_employees %></td>
+                    <th scope="row"><%= department.d_id %></th>
+                    <td><%= department.name %></td>
+                    <td><%= department.number_of_employees %></td>
                 </tr>
                 <% }) %>
             </tbody>

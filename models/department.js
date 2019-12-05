@@ -9,7 +9,7 @@ exports.getDept = function (res) {
         }
         res.render('department.ejs', {
             title: 'All Departments',
-            department: result
+            departments: result
         });
     });
 }
