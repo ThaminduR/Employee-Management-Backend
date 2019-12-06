@@ -73,7 +73,7 @@ exports.register = function (req, res) {
                         //     "code": 200,
                         //     "success": "user registered successfully"
                         // });
-                        res.render('login.ejs');
+                        res.redirect('/login')
                     } else {
                         console.log("adding user details failed");
                     }
@@ -105,8 +105,8 @@ exports.login = function (req, res) {
                         user_id: user_id
                     }
                     const accessToken = jwt.sign(user, process.env.SECRET)
-                    res.cookie("authtoken",accessToken);
-                    res.render('home.ejs');
+                    res.cookie("authtoken", accessToken);
+                    res.render('AdminLTE/starter', { title: "Welcome" });
                 }
                 else {
                     res.send({
@@ -126,12 +126,8 @@ exports.login = function (req, res) {
 }
 
 exports.logout = function (req, res) {
-    req.session.destroy((err) => {
-        if (err) {
-            return console.log(err)
-        }
-        res.redirect('/')
-    });
+    res.cookie('authtoken', { maxAge: Date.now() })
+    res.redirect('/login')
 }
 
 

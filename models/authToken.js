@@ -3,12 +3,11 @@ const jwt = require('jsonwebtoken')
 exports.authToken = function (req, res, next) {
     var token = req.cookies["authtoken"]
     
-    if (token == null) return res.sendStatus(401)
+    if (token == null) return res.render("login.ejs")
     
     jwt.verify(token, process.env.SECRET, (err, user) => {
         if (err) {
-            res.sendStatus(403)
-            console.log(err)
+            res.redirect('/login')
         } else {
             req.user = user
             next()
