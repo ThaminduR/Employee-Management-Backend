@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/user')
+const auth = require('../../models/authToken')
 
-
-router.get('/all', (req, res) => {
+router.get('/all', auth.authToken, (req, res) => {
     User.getusers(res);
 });
 

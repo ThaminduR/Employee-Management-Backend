@@ -1,6 +1,7 @@
 
 const db = require('../config/db')
 const jwt = require('jsonwebtoken')
+
 //function to get all the users from database 
 exports.getusers = function (res) {
     query = "SELECT * FROM employee ORDER BY id ASC"
@@ -100,7 +101,11 @@ exports.login = function (req, res) {
             // console.log('The solution is: ', results);
             if (results.length > 0) {
                 if (results[0].h_password == password) {
-                    
+                    var user = {
+                        user_id: user_id
+                    }
+                    const accessToken = jwt.sign(user, process.env.SECRET)
+                    res.cookie("authtoken",accessToken);
                     res.render('home.ejs');
                 }
                 else {
