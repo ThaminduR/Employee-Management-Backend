@@ -1,10 +1,11 @@
-<html>
-    <body>
-        <div class="form">
+<%- include('../partial/header') -%>
+<%- include('sidebar') -%>
+
+        <div class="form main">
             <div class="tab-content">
                 <div id="signup">
-                    <h1>Sign Up</h1>
-                    <form action="/user/register" method="post">
+                    <h2>Sign Up</h2>
+                    <form action="/api/user/register" method="post">
                             <div class="field-wrap">
                                 <label>
                                     First Name<span class="req">*</span>
@@ -53,7 +54,7 @@
                             </label>
                             <input type="password" name='password' required autocomplete="off" />
                         </div>
-                        <button type="submit"  class="button button-block">Get Started</button>
+                        <button type="submit"  class="button button-block">Register User</button>
                     </form>
                 </div>
             </div>

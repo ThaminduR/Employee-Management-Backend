@@ -1,12 +1,33 @@
-
 const db = require('../config/db')
 const jwt = require('jsonwebtoken')
 
-//function to get all the users from database 
+exports.getusers = function (res) {
+    query = "SELECT * FROM employee ORDER BY id ASC"
+    db.query(query, (err, result) => {
+        if (err) {
+            res.redirect('/')
+        }
+        res.render('admin/users.ejs', {
+            title: 'All Users',
+            users: result
+        })
+    })
+}
 
+exports.getSM = function (res) {
+    query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
+    db.query(query, (err, result) => {
+        if (err) {
+            res.redirect('/')
+        }
+        res.render('admin/users.ejs', {
+            title: 'All Second Management Users',
+            users: result
+        })
+    })
+}
 
-//function to register a user
-exports.register = function (req, res) {
+exports.registerSM = function (req, res) {
 
     var first_name = req.body.first_name
     var last_name = req.body.last_name
@@ -14,7 +35,6 @@ exports.register = function (req, res) {
     db.query('SELECT id FROM employee ORDER BY id DESC LIMIT 1', (error, result) => {
         if (result.length > 0) {
             id = parseInt(result[0].id, 10) + 1;
-            console.log(id)
         }
         var users = {
             "id": id,
@@ -25,6 +45,7 @@ exports.register = function (req, res) {
             "address": req.body.address,
             "contact_num": req.body.contact_num
         }
+
         var check = false
 
         db.query('INSERT INTO employee SET ?', users, function (error, results) {
@@ -71,15 +92,12 @@ exports.register = function (req, res) {
             })
         });
     });
-
 }
 
-
-//login function 
 exports.login = function (req, res) {
     var user_id = req.body.user_id
     var password = req.body.password
-    db.query('SELECT * FROM login_details WHERE user_id = ?', [user_id], function (error, results) {
+    db.query('SELECT * FROM admin_details WHERE id = ?', [user_id], function (error, results) {
         if (error) {
             // console.log("error ocurred",error);
             res.send({
@@ -89,39 +107,31 @@ exports.login = function (req, res) {
         } else {
             // console.log('The solution is: ', results);
             if (results.length > 0) {
+
                 if (results[0].h_password == password) {
+
                     var user = {
                         user_id: user_id,
-                        user_type: "user"
+                        user_type: "admin"
                     }
                     const accessToken = jwt.sign(user, process.env.SECRET)
+
                     res.cookie("authtoken", accessToken);
-                    res.render('AdminLTE/starter', { title: "Welcome" });
+                    res.render('admin.ejs', { title: "Admin Home" })
                 }
                 else {
                     res.send({
                         "code": 204,
-                        "failure": "Email and password does not match"
+                        "failure": "Invalid Credentials !"
                     });
                 }
             }
             else {
                 res.send({
                     "code": 204,
-                    "failure": "Email does not exits"
+                    "failure": "Invalid ID !"
                 })
             }
         }
     })
 }
-
-exports.logout = function (req, res) {
-    res.cookie('authtoken', { maxAge: Date.now() })
-    res.redirect('/login')
-}
-
-
-
-
-//if data insertion not working uncomment the console .logs and check the output 
-//TODO: Restrict duplicate emails 

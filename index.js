@@ -20,7 +20,7 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-const index = require('./routes/index')
+const index = require('./routes/indexRoutes')
 app.use('/', index);
 
 
