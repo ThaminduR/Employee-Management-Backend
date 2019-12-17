@@ -1,139 +1,153 @@
-const db = require('../config/db')
+const database = require('../config/db')
 const jwt = require('jsonwebtoken')
+const promise = require('promise')
 
-exports.getusers = function (res) {
+db = new database()
+
+exports.getusers = async function (res) {
     query = "SELECT * FROM employee ORDER BY id ASC"
-    db.query(query, (err, result) => {
-        if (err) {
-            res.redirect('/')
-        }
+
+    try {
+        result = await db.query(query)
+        res.render('admin/users.ejs', {
+            title: "All Users",
+            users: result
+        })
+    } catch (error) {
+        res.redirect('/')
+    }
+}
+
+exports.getSM = async function (res) {
+    query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
+
+    try {
+        result = await db.query(query)
         res.render('admin/users.ejs', {
             title: 'All Users',
             users: result
         })
-    })
+    } catch (error) {
+        res.redirect('/')
+    }
 }
 
-exports.getSM = function (res) {
-    query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
-    db.query(query, (err, result) => {
-        if (err) {
-            res.redirect('/')
-        }
-        res.render('admin/users.ejs', {
-            title: 'All Second Management Users',
-            users: result
-        })
-    })
-}
-
-exports.registerSM = function (req, res) {
+exports.registerSM = async function (req, res) {
 
     var first_name = req.body.first_name
     var last_name = req.body.last_name
-    var id = 1
-    db.query('SELECT id FROM employee ORDER BY id DESC LIMIT 1', (error, result) => {
-        if (result.length > 0) {
-            id = parseInt(result[0].id, 10) + 1;
-        }
-        var users = {
-            "id": id,
-            "firstname": req.body.first_name,
-            "lastname": req.body.last_name,
-            "marital_status": req.body.marital_status,
-            "birthday": req.body.birthday,
-            "address": req.body.address,
-            "contact_num": req.body.contact_num
-        }
+    var id = "EMP00001"
 
-        var check = false
+    query1 = 'SELECT id FROM employee ORDER BY id DESC LIMIT 1'
 
-        db.query('INSERT INTO employee SET ?', users, function (error, results) {
-            if (error) {
-                console.log("error occured", error)
+    try {
+        result = await db.query(query1)
+    } catch (error) {
+    }
 
-            } else {
-                check = true;
-                console.log('Added user detials', results)
-            }
-        })
+    if (result.length > 0) {
+        //check whether this works or not
+        str = result[0].id;
+        var temp_str = str.slice(3);
+        n = parseInt(temp_str) + 1;
+        length = n.toString().length;
+        temp_id = str.slice(0, -length);
+        id = temp_id + n.toString();
+    }
 
-        db.query('SELECT * FROM employee WHERE firstname = ? and lastname = ?', [first_name, last_name], function (error, results) {
-            var user_id = results[0].id
+    var dept = req.body.department
+    query_dept = 'SELECT d_id FROM department WHERE name = ?'
+    result_Dept = await db.query(query_dept, [dept])
+    D_id = result_Dept[0].d_id
 
-            var login_details = {
-                "user_id": user_id,
-                "h_password": req.body.password,
-                "salt": "salt not set",
-                "clearance_level": req.body.clearance_level
-            }
+    var j_title = req.body.job_title
+    query_j = 'SELECT j_id FROM jobtitle WHERE title = ?'
+    result_j = await db.query(query_j, [j_title])
+    j_id = result_j[0].j_id
 
-            db.query('INSERT INTO login_details SET ?', login_details, function (error, results) {
-                if (error) {
-                    console.log("error occured", error)
-                    res.send({
-                        "code": 400,
-                        "failed": "error occured"
-                    })
+    var pay_grade = req.body.pay_grade
+    query_p = 'SELECT pg_id FROM paygrade WHERE paygrade_name = ?'
+    result_p = await db.query(query_p, [pay_grade])
+    p_id = result_p[0].pg_id
 
-                } else {
-                    console.log("Login detials added", results)
-                    if (check) {
-                        // res.send({
-                        //     "code": 200,
-                        //     "success": "user registered successfully"
-                        // });
-                        res.redirect('/login')
-                    } else {
-                        console.log("adding user details failed");
-                    }
-                }
+    var emp_status = req.body.emp_status
+    query_e = 'SELECT status_id FROM employment_status WHERE type = ? '
+    result_e = await db.query(query_e, [emp_status])
+    status_id = result_e[0].status_id
 
-            })
-        });
-    });
+    firstname = req.body.first_name
+    lastname = req.body.last_name
+    marital_status = req.body.marital_status
+    birthday = req.body.birthday
+    address = req.body.address
+    contact_num = req.body.contact_num
+
+    user_ = [id, firstname, lastname, marital_status, birthday, address, contact_num, j_id, p_id, status_id, D_id]
+    
+    var user = {
+        "id": id,
+        "firstname": req.body.first_name,
+        "lastname": req.body.last_name,
+        "marital_status": req.body.marital_status,
+        "birthday": req.body.birthday,
+        "address": req.body.address,
+        "contact_num": req.body.contact_num,
+        "j_id": j_id,
+        "p_id": p_id,
+        "status_id": status_id,
+        "D_id": D_id
+    }
+
+    proc_query = 'CALL add_employee(?,?,?,?,?,?,?,?,?,?,?)'
+
+    try {
+        db.query(proc_query, user_)
+    } catch (error) {
+        alert("Error : Couldn't add employee")
+    }
 }
 
-exports.login = function (req, res) {
+exports.login = async function (req, res) {
     var user_id = req.body.user_id
     var password = req.body.password
-    db.query('SELECT * FROM admin_details WHERE id = ?', [user_id], function (error, results) {
-        if (error) {
-            // console.log("error ocurred",error);
-            res.send({
-                "code": 400,
-                "failed": "error ocurred"
-            })
-        } else {
-            // console.log('The solution is: ', results);
-            if (results.length > 0) {
+    query = 'SELECT * FROM admin_details WHERE id = ?'
 
-                if (results[0].h_password == password) {
+    try {
+        results = await db.query(query, [user_id])
+    } catch (error) {
+        res.send({
+            "code": 400,
+            "failed": "error ocurred"
+        })
+        return
+    }
 
-                    var user = {
-                        user_id: user_id,
-                        user_type: "admin"
-                    }
-                    const accessToken = jwt.sign(user, process.env.SECRET)
+    if (results.length > 0) {
 
-                    res.cookie("authtoken", accessToken)
-                    res.render('admin/adminHome.ejs', { title: "Admin Home" })
-                }
-                else {
-                    res.send({
-                        "code": 204,
-                        "failure": "Invalid Credentials !"
-                    });
-                }
+        if (results[0].h_password == password) {
+
+            var user = {
+                user_id: user_id,
+                user_type: "admin"
             }
-            else {
-                res.send({
-                    "code": 204,
-                    "failure": "Invalid ID !"
-                })
-            }
+            const accessToken = jwt.sign(user, process.env.SECRET)
+
+            res.cookie("authtoken", accessToken)
+            res.render('admin/adminHome.ejs', { title: "Admin Home" })
         }
-    })
+        else {
+            res.send({
+                "code": 204,
+                "failure": "Invalid Credentials !"
+            });
+        }
+    }
+    else {
+        res.send({
+            "code": 204,
+            "failure": "Invalid ID !"
+        })
+    }
 }
 
 exports.logout = function (req, res) {
