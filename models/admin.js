@@ -117,7 +117,7 @@ exports.login = function (req, res) {
                     const accessToken = jwt.sign(user, process.env.SECRET)
 
                     res.cookie("authtoken", accessToken);
-                    res.render('admin.ejs', { title: "Admin Home" })
+                    res.render('admin/adminHome.ejs', { title: "Admin Home" })
                 }
                 else {
                     res.send({
