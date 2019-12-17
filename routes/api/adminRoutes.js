@@ -12,12 +12,17 @@ router.get('/allSMs', auth.authTokenAdmin, (req, res) => {
 })
 
 router.get('/registerSM', (req, res) => {
-    res.render("admin/register",{title:"Register Second Management User"})
-});
+    res.render("admin/register", { title: "Register Second Management User" })
+})
 
 //register the second management users
 router.post('/registerSM', (req, res) => {
-    Admin.registerSM(req, res);
-});
+    Admin.registerSM(req, res)
+})
+
+router.get('/logout', (req, res) => {
+    Admin.logout(req, res)
+})
+
 
 module.exports = router

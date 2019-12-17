@@ -2,22 +2,17 @@ const express = require('express')
 const router = express.Router()
 const apirouter = require('./api/Routes')
 const login = require('../models/login')
+const auth = require('../models/authFunctions')
 
+router.get('/login', auth.loggedin, (req, res) => { res.render("login.ejs") })
 
-router.get('/login', (req, res) => { res.render("login.ejs") })
+router.post('/login', auth.loggedin, (req, res) => { login.login(req, res) })
 
-router.post('/login', (req, res) => { login.login(req,res) })
-    
 
 router.use('/api', apirouter)
 
-router.use('/', (req, res) => {
-    if (req.cookies["authtoken"]) {
-        var user = req.cookies["authtoken"]
-        res.render('index.ejs', { title: "Home" })
-    } else {
-        res.render("login.ejs")
-    }
+router.use('/', auth.loggedin, (req, res) => {
+    res.render("login.ejs")
 })
 
 module.exports = router;

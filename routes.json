@@ -1,0 +1,30 @@
+{
+    "Route Description": [
+        {
+            "Route type": "Admin Routes - starts with api/admin",
+            "Routes": [
+                "GET /allUsers - Get all Users",
+                "GET /registerSM - register SM view",
+                "POST /registerSM - register SM model",
+                "GET /allSMs - Get all SMs",
+                "POST /removeSM - remove an employee from SM status",
+                "GET /logout - logout"
+            ]
+        },
+        {
+            "Route type": "SM Routes - starts with api/sm",
+            "Routes": [
+                "GET /allUsers - Get all Users",
+                "GET /registerUser - register SM view",
+                "POST /registerUser - register SM model",
+                "GET /logout - logout"
+            ]
+        },
+        {
+            "Route type": "User Routes - starts with api/user",
+            "Routes": [
+                "GET /logout - logout"
+            ]
+        }
+    ]
+}

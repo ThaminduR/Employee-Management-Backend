@@ -116,7 +116,7 @@ exports.login = function (req, res) {
                     }
                     const accessToken = jwt.sign(user, process.env.SECRET)
 
-                    res.cookie("authtoken", accessToken);
+                    res.cookie("authtoken", accessToken)
                     res.render('admin/adminHome.ejs', { title: "Admin Home" })
                 }
                 else {
@@ -134,4 +134,9 @@ exports.login = function (req, res) {
             }
         }
     })
+}
+
+exports.logout = function (req, res) {
+    res.cookie('authtoken', { maxAge: Date.now() })
+    res.redirect('/login')
 }
