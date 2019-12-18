@@ -1,127 +1,24 @@
 
-const db = require('../config/db')
+const database = require('../config/db')
 const jwt = require('jsonwebtoken')
 
-//function to get all the users from database 
+db = new database()
 
+exports.getNEmp = async function (res) {
+    query = "SELECT * FROM employee WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervices) ORDER BY id ASC"
 
-//function to register a user
-exports.register = function (req, res) {
-
-    var first_name = req.body.first_name
-    var last_name = req.body.last_name
-    var id = 1
-    db.query('SELECT id FROM employee ORDER BY id DESC LIMIT 1', (error, result) => {
-        if (result.length > 0) {
-            id = parseInt(result[0].id, 10) + 1;
-            console.log(id)
-        }
-        var users = {
-            "id": id,
-            "firstname": req.body.first_name,
-            "lastname": req.body.last_name,
-            "marital_status": req.body.marital_status,
-            "birthday": req.body.birthday,
-            "address": req.body.address,
-            "contact_num": req.body.contact_num
-        }
-        var check = false
-
-        db.query('INSERT INTO employee SET ?', users, function (error, results) {
-            if (error) {
-                console.log("error occured", error)
-
-            } else {
-                check = true;
-                console.log('Added user detials', results)
-            }
+    try {
+        result = await db.query(query)
+        res.render('admin/users.ejs', {
+            title: "All Users",
+            users: result
         })
-
-        db.query('SELECT * FROM employee WHERE firstname = ? and lastname = ?', [first_name, last_name], function (error, results) {
-            var user_id = results[0].id
-
-            var login_details = {
-                "user_id": user_id,
-                "h_password": req.body.password,
-                "salt": "salt not set",
-                "clearance_level": req.body.clearance_level
-            }
-
-            db.query('INSERT INTO login_details SET ?', login_details, function (error, results) {
-                if (error) {
-                    console.log("error occured", error)
-                    res.send({
-                        "code": 400,
-                        "failed": "error occured"
-                    })
-
-                } else {
-                    console.log("Login detials added", results)
-                    if (check) {
-                        // res.send({
-                        //     "code": 200,
-                        //     "success": "user registered successfully"
-                        // });
-                        res.redirect('/login')
-                    } else {
-                        console.log("adding user details failed");
-                    }
-                }
-
-            })
-        });
-    });
-
-}
-
-
-//login function 
-exports.login = function (req, res) {
-    var user_id = req.body.user_id
-    var password = req.body.password
-    db.query('SELECT * FROM login_details WHERE user_id = ?', [user_id], function (error, results) {
-        if (error) {
-            // console.log("error ocurred",error);
-            res.send({
-                "code": 400,
-                "failed": "error ocurred"
-            })
-        } else {
-            // console.log('The solution is: ', results);
-            if (results.length > 0) {
-                if (results[0].h_password == password) {
-                    var user = {
-                        user_id: user_id,
-                        user_type: "user"
-                    }
-                    const accessToken = jwt.sign(user, process.env.SECRET)
-                    res.cookie("authtoken", accessToken);
-                    res.render('AdminLTE/starter', { title: "Welcome" });
-                }
-                else {
-                    res.send({
-                        "code": 204,
-                        "failure": "Email and password does not match"
-                    });
-                }
-            }
-            else {
-                res.send({
-                    "code": 204,
-                    "failure": "Email does not exits"
-                })
-            }
-        }
-    })
+    } catch (error) {
+        res.redirect('/')
+    }
 }
 
 exports.logout = function (req, res) {
     res.cookie('authtoken', { maxAge: Date.now() })
     res.redirect('/login')
 }
-
-
-
-
-//if data insertion not working uncomment the console .logs and check the output 
-//TODO: Restrict duplicate emails 

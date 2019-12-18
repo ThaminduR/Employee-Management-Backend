@@ -8,7 +8,6 @@ router.get('/login', auth.loggedin, (req, res) => { res.render("login.ejs") })
 
 router.post('/login', auth.loggedin, (req, res) => { login.login(req, res) })
 
-
 router.use('/api', apirouter)
 
 router.use('/', auth.loggedin, (req, res) => {
