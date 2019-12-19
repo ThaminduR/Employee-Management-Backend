@@ -65,6 +65,11 @@ exports.loggedin = function (req, res, next) {
                         title: "Admin"
                     })
                 }
+                if (user.user_type == "sm") {
+                    res.render("sm/home", {
+                        title: "Second Management User"
+                    })
+                }
             }
         })
     }

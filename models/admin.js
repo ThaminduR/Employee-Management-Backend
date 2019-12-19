@@ -4,19 +4,7 @@ const jwt = require('jsonwebtoken')
 
 db = new database()
 
-exports.getSupervicers = async function (res) {
-    query = "SELECT * FROM employee WHERE id IN (SELECT s_id FROM supervices) ORDER BY id ASC"
 
-    try {
-        result = await db.query(query)
-        res.render('admin/supervices.ejs', {
-            title: "All Supervicers",
-            users: result
-        })
-    } catch (error) {
-        res.redirect('/')
-    }
-}
 
 exports.getSM = async function (res) {
     query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
@@ -132,9 +120,7 @@ exports.login = async function (req, res) {
                 user_type: "admin"
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
-            console.log("ttt")
             res.cookie("authtoken", accessToken)
-            console.log("ttt22")
             //res.render('admin/adminHome.ejs', { title: "Admin Home" })
             res.redirect('/')
             return

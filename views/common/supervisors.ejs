@@ -1,5 +1,4 @@
 <%- include('../partial/header') -%>
-<%- include('sidebar') -%>
 
 <div class="table-wrapper main">
     <% if (users.length > 0) {%>
@@ -42,7 +41,7 @@
         function removeEM(id){
             $.ajax({
                 type: 'POST',
-                url: 'removeEM',
+                url: 'removeSUP',
                 data: {
                     "id": id
                 },

@@ -6,11 +6,11 @@ const User = require('../../models/user')
 const SecM = require('../../models/sm')
 
 router.get('/allNEmp', auth.authTokenAdmin, (req, res) => {
-    User.getNEmp(res)
+    SecM.getNEmp(res)
 })
 
 router.get('/allSups', auth.authTokenAdmin, (req, res) => {
-    Admin.getSupervicers(res)
+    SecM.getsupervisors(res)
 })
 
 router.get('/allSMs', auth.authTokenAdmin, (req, res) => {
