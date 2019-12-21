@@ -28,8 +28,8 @@
                     <td><%= user.birthday %></td>
                     <td><%= user.address %></td>
                     <td><%= user.contact_num %></td>
-                    <td><button id="editbutton" onClick=removeEM("<%= user.id %>")>Edit</button></td>
-                    <td><button id="rmbutton" onClick=editEM("<%= user.id %>")>Remove</button></td>
+                    <td><button id="editbutton" onClick=editEM("<%= user.id %>")>Edit</button></td>
+                    <td><button id="rmbutton" onClick=removeEM("<%= user.id %>")>Remove</button></td>
                     
                 </tr>
                 <% }) %>
@@ -61,8 +61,6 @@
                 data: {
                     "id": id
                 },
-                success: function (result) {
-                }
             });
         }
 
