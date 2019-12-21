@@ -5,7 +5,8 @@
     <div class="tab-content">
         <div id="signup">
             <h2>Sign Up</h2>
-            <form action="/api/admin/registerSM" method="post">
+            <form action="/api/admin/editEM" method="post">
+            <input type="text" value="<% id %>">
                 <div class="field-wrap">
                     <label>
                         First Name<span class="req">*</span>
@@ -85,14 +86,7 @@
                     </select>
                 </div>
                 <p></p>
-
-                <div class="field-wrap">
-                    <label>
-                        Set A Password<span class="req">*</span>
-                    </label>
-                    <input type="password" name='password' required autocomplete="off" />
-                </div>
-                <button type="submit" class="button button-block">Register User</button>
+                <button type="submit" class="button button-block">Submit</button>
             </form>
         </div>
     </div>
