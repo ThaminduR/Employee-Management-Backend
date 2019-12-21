@@ -4,27 +4,32 @@
          <link rel="stylesheet" href="src/css/styles-login.css">
      </head>
     <body>
-         <div id="login">
-            <h1>Employee Management</h1>
-            <form action="/login" method="post">
+        <div class="container container-custom">
+            <div id="login">
+                <h1>Employee Management</h1>
+                <hr>
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <div class="field-wrap">
+                            <label>
+                            User ID<span class="req">*</span>
+                            </label>
+                            <input type="text" name='user_id' required autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="field-wrap">
+                            <label>
+                            Password<span class="req">*</span>
+                            </label>
+                            <input type="password" name='password' required autocomplete="off" />
+                        </div>
+                    </div>
+                    <button type=submit class="btn btn-primary button button-block">Log In</button>
 
-                <div class="field-wrap">
-                    <label>
-                        User ID<span class="req">*</span>
-                    </label>
-                    <input type="text" name='user_id' required autocomplete="off" />
-                </div>
+                </form>
 
-                <div class="field-wrap">
-                    <label>
-                        Password<span class="req">*</span>
-                    </label>
-                    <input type="password" name='password' required autocomplete="off" />
-                </div>
-                <button type=sumbit class="button button-block">Log In</button>
-
-            </form>
-
+            </div>
         </div>
     <!-- JQuery and Popper -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
