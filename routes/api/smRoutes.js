@@ -8,12 +8,16 @@ router.get('/allNEmp', auth.authTokenSM, (req, res) => {
     SecM.getNEmp(res)
 })
 
-router.get('/editEM', auth.authTokenSM,(req,res)=>{
-    user_id = req.body.id 
-    res.render('editEM.ejs',{
-        title:"Edit Employee",
-        id:id
+router.get('/editEM', auth.authTokenSM, (req, res) => {
+    user_id = req.body.id
+    res.render('sm/editEM.ejs', {
+        title: "Edit Employee",
+        id: user_id
     })
+})
+
+router.post('/editEM', auth.authTokenSM, (req, res) => {
+    SecM.editEM(req, res)
 })
 
 router.post('/removeEM', auth.authTokenSM, (req, res) => {

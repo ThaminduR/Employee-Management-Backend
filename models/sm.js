@@ -20,6 +20,7 @@ exports.getNEmp = async function (res) {
 exports.editEM = async function (req,res){
     user_id = req.body.id
     
+    
 }
 
 
