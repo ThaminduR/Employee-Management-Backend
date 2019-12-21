@@ -17,6 +17,7 @@ router.get('/allSMs', auth.authTokenAdmin, (req, res) => {
     Admin.getSM(res)
 })
 
+//view of register the second management users
 router.get('/registerSM', auth.authTokenAdmin, (req, res) => {
     res.render("admin/register", { title: "Register Second Management User" })
 })
