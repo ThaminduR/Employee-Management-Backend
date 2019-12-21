@@ -1,0 +1,102 @@
+<%- include('../partial/header') -%>
+<%- include('sidebar') -%>
+
+<div class="form main">
+    <div class="tab-content">
+        <div id="signup">
+            <h2>Sign Up</h2>
+            <form action="/api/admin/registerSM" method="post">
+                <div class="field-wrap">
+                    <label>
+                        First Name<span class="req">*</span>
+                    </label>
+                    <input type="text" name="first_name" required autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <label>
+                        Last Name<span class="req">*</span>
+                    </label>
+                    <input type="text" name="last_name" required autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <label>
+                        Marital Status <span class="req">*</span>
+                    </label>
+                    <input type="text" name="marital_status" required autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <label>
+                        Birthday <span class="req">*</span>
+                    </label>
+                    <input type="text" name="birthday" required autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <label>
+                        Address <span class="req">*</span>
+                    </label>
+                    <input type="text" name="address" required autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <label>
+                        Contact Num <span class="req">*</span>
+                    </label>
+                    <input type="text" name="contact_num" required autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <p>Department </p>
+                    <select name="department">
+                        <option value="Finance">Finance</option>
+                        <option value="Accounting">Accounting</option>
+                        <option value="Human Resource">Human Resource</option>
+                        <option value="Technical">Technical</option>
+                        <option value="Maintenance">Maintenance</option>
+                    </select>
+                </div>
+                <p></p>
+
+                <div class="field-wrap">
+                    <p>Job Title </p>
+                    <select name="job_title">
+                        <option value="Manager">Manager</option>
+                        <option value="Employee">Employee</option>
+                    </select>
+                </div>
+                <p></p>
+
+                <div class="field-wrap">
+                    <p>Pay Grade</p>
+                    <select name="pay_grade">
+                        <option value="level-1">Level 1</option>
+                        <option value="level-2">Level 2</option>
+                        <option value="level-3">Level 3</option>
+                    </select>
+                </div>
+                <p></p>
+
+                <div class="field-wrap">
+                    <p>Employement Status</p>
+                    <select name="emp_status">
+                        <option value="Permanent">Permanent</option>
+                        <option value="Contract full-time">Contract full time</option>
+                        <option value="Contract part-time">Contract part time</option>
+                        <option value="Intern full-time">Intern full time</option>
+                        <option value="Intern part-time">Intern part time</option>
+                        <option value="Frelance">Freelance</option>
+                    </select>
+                </div>
+                <p></p>
+
+                <div class="field-wrap">
+                    <label>
+                        Set A Password<span class="req">*</span>
+                    </label>
+                    <input type="password" name='password' required autocomplete="off" />
+                </div>
+                <button type="submit" class="button button-block">Register User</button>
+            </form>
+        </div>
+    </div>
+</div> <!-- /form -->
+</body>
+
+</html>

@@ -17,6 +17,12 @@ exports.getNEmp = async function (res) {
     }
 }
 
+exports.editEM = async function (req,res){
+    user_id = req.body.id
+    
+}
+
+
 exports.removeEM = async function (req, res) {
     user_id = req.body.id
     query = 'CALL remove_em(?)'
@@ -67,7 +73,7 @@ exports.login = async function (req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('sm/Home.ejs', { title: "Admin Home" })
+            res.render('sm/Home.ejs', { title: "Second Management Home" })
             return
         }
         else {

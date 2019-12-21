@@ -14,6 +14,7 @@
                     <th scope="col">Address</th>
                     <th scope="col">Contact Num</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
     
                 </tr>
             </thead>
@@ -27,7 +28,9 @@
                     <td><%= user.birthday %></td>
                     <td><%= user.address %></td>
                     <td><%= user.contact_num %></td>
-                    <td><button id="rmbutton" onClick=removeEM("<%= user.id %>")>Remove</button></td>
+                    <td><button id="editbutton" onClick=removeEM("<%= user.id %>")>Edit</button></td>
+                    <td><button id="rmbutton" onClick=editEM("<%= user.id %>")>Remove</button></td>
+                    
                 </tr>
                 <% }) %>
             </tbody>
@@ -50,6 +53,19 @@
                 }
             });
         }
+
+        function editEM(id){
+            $.ajax({
+                type: 'GET',
+                url: 'editEM',
+                data: {
+                    "id": id
+                },
+                success: function (result) {
+                }
+            });
+        }
+
 </script>
 
 </body>
