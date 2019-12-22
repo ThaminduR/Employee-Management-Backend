@@ -10,6 +10,7 @@ router.get('/allNEmp', auth.authTokenSM, (req, res) => {
 
 router.get('/editEM', auth.authTokenSM, (req, res) => {
     user_id = req.body.id
+    console.log(user_id)
     res.render('sm/editEM.ejs', {
         title: "Edit Employee",
         id: user_id
