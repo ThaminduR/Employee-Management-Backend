@@ -44,7 +44,8 @@
                 </div>
                 <div class="field-wrap">
                     <p>Department </p>
-                    <select name="department">
+                    <select name="department" required>
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="Finance">Finance</option>
                         <option value="Accounting">Accounting</option>
                         <option value="Human Resource">Human Resource</option>
@@ -56,7 +57,8 @@
 
                 <div class="field-wrap">
                     <p>Job Title </p>
-                    <select name="job_title">
+                    <select name="job_title" required>
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="Manager">Manager</option>
                         <option value="Employee">Employee</option>
                     </select>
@@ -65,7 +67,8 @@
 
                 <div class="field-wrap">
                     <p>Pay Grade</p>
-                    <select name="pay_grade">
+                    <select name="pay_grade" required>
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="level-1">Level 1</option>
                         <option value="level-2">Level 2</option>
                         <option value="level-3">Level 3</option>
@@ -75,7 +78,8 @@
 
                 <div class="field-wrap">
                     <p>Employement Status</p>
-                    <select name="emp_status">
+                    <select name="emp_status" required>
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="Permanent">Permanent</option>
                         <option value="Contract full-time">Contract full time</option>
                         <option value="Contract part-time">Contract part time</option>

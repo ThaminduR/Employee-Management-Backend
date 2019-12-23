@@ -24,11 +24,10 @@ exports.login = async function (req, res) {
     }
     
     if (results.length > 0) {
-        console.log(results[0])
         SecM.login(req, res)
     }
 
-    //checks for second management users and logs them
+    //checks for supervisor users and logs them
     sup_query = "SELECT * FROM supervices WHERE s_id = ?"
 
     try {
@@ -38,7 +37,6 @@ exports.login = async function (req, res) {
     }
 
     if (result1.length > 0) {
-        console.log(result1[0])
         Sup.login(req, res)
     }
 

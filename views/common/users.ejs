@@ -29,6 +29,7 @@
                     <td><%= user.address %></td>
                     <td><%= user.contact_num %></td>
                     <td><button id="editbutton" onClick=editEM("<%= user.id %>")>Edit</button></td>
+                    <td><button id="editbutton" href="editEM?id=<%= user.id %>">Edit</button></td>
                     <td><button id="rmbutton" onClick=removeEM("<%= user.id %>")>Remove</button></td>
                     
                 </tr>
@@ -60,6 +61,9 @@
                 url: 'editEM',
                 data: {
                     "id": id
+                },
+                success(data){
+                    $(".main").html(data)
                 }
             });
         }

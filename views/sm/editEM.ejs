@@ -1,51 +1,51 @@
-<%- include('../partial/header') -%>
+
 <%- include('sidebar') -%>
 
-<div class="form main">
     <div class="tab-content">
         <div id="signup">
             <h2>Sign Up</h2>
-            <form action="/api/admin/editEM" method="post">
-            <input type="text" value="<%= id %>">
+            <form action="/api/sm/editEM" method="post">
+            <input type="text" value="<%= id %>" name="id" readonly>
                 <div class="field-wrap">
                     <label>
-                        First Name<span class="req">*</span>
+                        First Name<span class="req"></span>
                     </label>
-                    <input type="text" name="first_name" required autocomplete="off" />
+                    <input type="text" name="first_name"  autocomplete="off" />
                 </div>
                 <div class="field-wrap">
                     <label>
-                        Last Name<span class="req">*</span>
+                        Last Name<span class="req"></span>
                     </label>
-                    <input type="text" name="last_name" required autocomplete="off" />
+                    <input type="text" name="last_name"  autocomplete="off" />
                 </div>
                 <div class="field-wrap">
                     <label>
-                        Marital Status <span class="req">*</span>
+                        Marital Status <span class="req"></span>
                     </label>
-                    <input type="text" name="marital_status" required autocomplete="off" />
+                    <input type="text" name="marital_status"  autocomplete="off" />
                 </div>
                 <div class="field-wrap">
                     <label>
-                        Birthday <span class="req">*</span>
+                        Birthday <span class="req"></span>
                     </label>
-                    <input type="text" name="birthday" required autocomplete="off" />
+                    <input type="text" name="birthday"  autocomplete="off" />
                 </div>
                 <div class="field-wrap">
                     <label>
-                        Address <span class="req">*</span>
+                        Address <span class="req"></span>
                     </label>
-                    <input type="text" name="address" required autocomplete="off" />
+                    <input type="text" name="address"  autocomplete="off" />
                 </div>
                 <div class="field-wrap">
                     <label>
-                        Contact Num <span class="req">*</span>
+                        Contact Num <span class="req"></span>
                     </label>
-                    <input type="text" name="contact_num" required autocomplete="off" />
+                    <input type="text" name="contact_num"  autocomplete="off" />
                 </div>
                 <div class="field-wrap">
                     <p>Department </p>
                     <select name="department">
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="Finance">Finance</option>
                         <option value="Accounting">Accounting</option>
                         <option value="Human Resource">Human Resource</option>
@@ -57,7 +57,8 @@
 
                 <div class="field-wrap">
                     <p>Job Title </p>
-                    <select name="job_title">
+                    <select name="job_title" >
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="Manager">Manager</option>
                         <option value="Employee">Employee</option>
                     </select>
@@ -67,6 +68,7 @@
                 <div class="field-wrap">
                     <p>Pay Grade</p>
                     <select name="pay_grade">
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="level-1">Level 1</option>
                         <option value="level-2">Level 2</option>
                         <option value="level-3">Level 3</option>
@@ -77,6 +79,7 @@
                 <div class="field-wrap">
                     <p>Employement Status</p>
                     <select name="emp_status">
+                        <option value="" selected disabled hidden>Choose here</option>
                         <option value="Permanent">Permanent</option>
                         <option value="Contract full-time">Contract full time</option>
                         <option value="Contract part-time">Contract part time</option>
@@ -90,7 +93,3 @@
             </form>
         </div>
     </div>
-</div> <!-- /form -->
-</body>
-
-</html>
