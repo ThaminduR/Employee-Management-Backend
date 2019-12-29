@@ -8,6 +8,16 @@ router.get('/allNEmp', auth.authTokenSM, (req, res) => {
     SecM.getNEmp(res)
 })
 
+//view of register the users
+router.get('/registerEM', auth.authTokenSM, (req, res) => {
+    res.render("sm/register", { title: "Register Second Management User" })
+})
+
+//register the users
+router.post('/registerSM', auth.authTokenSM, (req, res) => {
+    SecM.registerEM(reeq, res)
+})
+
 router.get('/editEM', auth.authTokenSM, (req, res) => {
     SecM.editEMView(req, res)
 
