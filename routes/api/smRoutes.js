@@ -35,9 +35,4 @@ router.get('/allSups', auth.authTokenSM, (req, res) => {
     SecM.getsupervisors(res)
 })
 
-router.get('/logout', auth.authTokenSM, (req, res) => {
-    User.logout(req, res)
-})
-
-
 module.exports = router
