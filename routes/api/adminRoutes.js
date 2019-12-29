@@ -35,9 +35,7 @@ router.post('/removeEM', auth.authTokenAdmin, (req, res) => {
     SecM.removeEM(req, res)
 })
 
-router.get('/logout', auth.authTokenAdmin, (req, res) => {
-    User.logout(req, res)
-})
+
 
 
 module.exports = router

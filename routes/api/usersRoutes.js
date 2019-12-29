@@ -12,5 +12,3 @@ router.get('/logout', (req, res) => {
 })
 
 module.exports = router;
-
-// Started coding the project @MithunW
