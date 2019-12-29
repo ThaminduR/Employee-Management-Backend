@@ -2,101 +2,113 @@
 <%- include('sidebar') -%>
 
 <div class="form main">
-    <div class="tab-content">
+    <div class="tab-content container-fluid" style="font-size: 20px;">
+        <br>
         <div id="signup">
-            <form action="/api/admin/registerSM" method="post">
-                <div class="field-wrap">
-                    <label>
-                        First Name<span class="req">*</span>
-                    </label>
-                    <input type="text" name="first_name" required autocomplete="off" />
-                </div>
-                <div class="field-wrap">
-                    <label>
-                        Last Name<span class="req">*</span>
-                    </label>
-                    <input type="text" name="last_name" required autocomplete="off" />
-                </div>
-                <div class="field-wrap">
-                    <label>
-                        Marital Status <span class="req">*</span>
-                    </label>
-                    <input type="text" name="marital_status" required autocomplete="off" />
-                </div>
-                <div class="field-wrap">
-                    <label>
-                        Birthday <span class="req">*</span>
-                    </label>
-                    <input type="text" name="birthday" required autocomplete="off" />
-                </div>
-                <div class="field-wrap">
-                    <label>
-                        Address <span class="req">*</span>
-                    </label>
-                    <input type="text" name="address" required autocomplete="off" />
-                </div>
-                <div class="field-wrap">
-                    <label>
-                        Contact Num <span class="req">*</span>
-                    </label>
-                    <input type="text" name="contact_num" required autocomplete="off" />
-                </div>
-                <div class="field-wrap">
-                    <p>Department </p>
-                    <select name="department" required>
-                        <option value="" selected disabled hidden>Choose here</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Accounting">Accounting</option>
-                        <option value="Human Resource">Human Resource</option>
-                        <option value="Technical">Technical</option>
-                        <option value="Maintenance">Maintenance</option>
-                    </select>
-                </div>
-                <p></p>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" action="/api/admin/registerSM" method="post">
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                First Name<span class="req">*</span>
+                            </label>
+                            <input class="col-md-3 form-control" type="text" id="first_name" name="first_name" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                Last Name<span class="req">*</span>
+                            </label>
+                            <input type="text" class="col-md-3 form-control" id="last_name" name="last_name" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                Marital Status <span class="req">*</span>
+                            </label>
+                            <input class="col-md-3 form-control" type="text" name="marital_status" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                Birthday <span class="req">*</span>
+                            </label>
+                            <input class="col-md-3 form-control" type="text" name="birthday" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                Address <span class="req">*</span>
+                            </label>
+                            <input class="col-md-6 form-control" type="text" name="address" required autocomplete="off" />
+                        </div>
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                Contact Num <span class="req">*</span>
+                            </label>
+                            <input type="text"  class="col-md-3 form-control" name="contact_num" required autocomplete="off" />
+                        </div>
+                        
+                        <!-- Selects Start Here -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="field-wrap form-group">
+                                    <p>Department </p>
+                                    <select class="custom-select d-block w-100" name="department" required>
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Accounting">Accounting</option>
+                                        <option value="Human Resource">Human Resource</option>
+                                        <option value="Technical">Technical</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                    </select>
+                                </div>
+                                <p></p>
+                        
+                                <div class="field-wrap form-group">
+                                    <p>Job Title </p>
+                                    <select class="custom-select d-block w-100" name="job_title" required>
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Employee">Employee</option>
+                                    </select>
+                                </div>
+                                <p></p>
 
-                <div class="field-wrap">
-                    <p>Job Title </p>
-                    <select name="job_title" required>
-                        <option value="" selected disabled hidden>Choose here</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Employee">Employee</option>
-                    </select>
-                </div>
-                <p></p>
+                                <div class="field-wrap form-group">
+                                    <p>Pay Grade</p>
+                                    <select class="custom-select d-block w-100" name="pay_grade" required>
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        <option value="level-1">Level 1</option>
+                                        <option value="level-2">Level 2</option>
+                                        <option value="level-3">Level 3</option>
+                                    </select>
+                                </div>
+                                <p></p>
 
-                <div class="field-wrap">
-                    <p>Pay Grade</p>
-                    <select name="pay_grade" required>
-                        <option value="" selected disabled hidden>Choose here</option>
-                        <option value="level-1">Level 1</option>
-                        <option value="level-2">Level 2</option>
-                        <option value="level-3">Level 3</option>
-                    </select>
-                </div>
-                <p></p>
+                                <div class="field-wrap form-group">
+                                    <p>Employement Status</p>
+                                    <select class="custom-select d-block w-100" name="emp_status" required>
+                                        <option value="" selected disabled hidden>Choose here</option>
+                                        <option value="Permanent">Permanent</option>
+                                        <option value="Contract full-time">Contract full time</option>
+                                        <option value="Contract part-time">Contract part time</option>
+                                        <option value="Intern full-time">Intern full time</option>
+                                        <option value="Intern part-time">Intern part time</option>
+                                        <option value="Frelance">Freelance</option>
+                                    </select>
 
-                <div class="field-wrap">
-                    <p>Employement Status</p>
-                    <select name="emp_status" required>
-                        <option value="" selected disabled hidden>Choose here</option>
-                        <option value="Permanent">Permanent</option>
-                        <option value="Contract full-time">Contract full time</option>
-                        <option value="Contract part-time">Contract part time</option>
-                        <option value="Intern full-time">Intern full time</option>
-                        <option value="Intern part-time">Intern part time</option>
-                        <option value="Frelance">Freelance</option>
-                    </select>
-                </div>
-                <p></p>
+                                </div>
+                                <p></p>
+                            </div>
+                        </div>
 
-                <div class="field-wrap">
-                    <label>
-                        Set A Password<span class="req">*</span>
-                    </label>
-                    <input type="password" name='password' required autocomplete="off" />
+                        <div class="field-wrap form-group">
+                            <label class="col-md-3 control-label">
+                                Set A Password<span class="req">*</span>
+                            </label>
+                            <input type="password" class="col-md-3 form-control" name='password' required autocomplete="off" />
+                        </div>
+                        <button type="submit" class="btn btn-primary button-block">Register User</button>
+                    </form>
                 </div>
-                <button type="submit" class="button button-block">Register User</button>
-            </form>
+            </div>
         </div>
     </div>
 </div> <!-- /form -->
