@@ -54,9 +54,9 @@ exports.registerSM = async function (req, res) {
     j_id = result_j[0].j_id
 
     pay_grade = req.body.pay_grade
-    query_p = 'SELECT pg_id FROM paygrade WHERE paygrade_name = ?'
+    query_p = 'SELECT p_id FROM paygrade WHERE paygrade_name = ?'
     result_p = await db.query(query_p, [pay_grade])
-    p_id = result_p[0].pg_id
+    p_id = result_p[0].p_id
 
     emp_status = req.body.emp_status
     query_e = 'SELECT status_id FROM employment_status WHERE type = ? '
@@ -74,9 +74,10 @@ exports.registerSM = async function (req, res) {
     user_ = [id, firstname, lastname, marital_status, birthday, address, contact_num, j_id, p_id, status_id, D_id, h_password]
 
     proc_query = 'CALL add_employee(?,?,?,?,?,?,?,?,?,?,?,?)'
-
+    query = "INSERT INTO admin_user VALUES (?,?)"
     try {
         db.query(proc_query, user_)
+        db.query(query, ["admin", id])
         res.redirect('/')
     } catch (error) {
         console.log("Error : Couldn't add employee")

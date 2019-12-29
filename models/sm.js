@@ -156,7 +156,7 @@ exports.editEM = async function (req, res) {
         console.log("Error occured in EditEM function !")
     }
 
-    //sete emp status
+    //set emp status
     if (!req.body.emp_status) {
         status_id = result_s[0].status_id
     } else {
@@ -171,6 +171,70 @@ exports.editEM = async function (req, res) {
         console, log("Can't edit employee")
     }
     res.redirect('./')
+}
+
+exports.registerEM = async function (req, res) {
+
+    first_name = req.body.first_name
+    last_name = req.body.last_name
+    id = "EMP00001"
+
+    query1 = 'SELECT id FROM employee ORDER BY id DESC LIMIT 1'
+
+    try {
+        result = await db.query(query1)
+    } catch (error) {
+    }
+
+    if (result.length > 0) {
+        //check whether this works or not
+        str = result[0].id;
+        temp_str = str.slice(3);
+        n = parseInt(temp_str) + 1;
+        length = n.toString().length;
+        temp_id = str.slice(0, -length);
+        id = temp_id + n.toString();
+    }
+
+    dept = req.body.department
+    query_dept = 'SELECT d_id FROM department WHERE name = ?'
+    result_Dept = await db.query(query_dept, [dept])
+    D_id = result_Dept[0].d_id
+
+    j_title = req.body.job_title
+    query_j = 'SELECT j_id FROM jobtitle WHERE title = ?'
+    result_j = await db.query(query_j, [j_title])
+    j_id = result_j[0].j_id
+
+    pay_grade = req.body.pay_grade
+    query_p = 'SELECT p_id FROM paygrade WHERE paygrade_name = ?'
+    result_p = await db.query(query_p, [pay_grade])
+    p_id = result_p[0].pg_id
+
+    emp_status = req.body.emp_status
+    query_e = 'SELECT status_id FROM employment_status WHERE type = ? '
+    result_e = await db.query(query_e, [emp_status])
+    status_id = result_e[0].status_id
+
+    firstname = req.body.first_name
+    lastname = req.body.last_name
+    marital_status = req.body.marital_status
+    birthday = req.body.birthday
+    address = req.body.address
+    contact_num = req.body.contact_num
+    h_password = req.body.password
+
+    user_ = [id, firstname, lastname, marital_status, birthday, address, contact_num, j_id, p_id, status_id, D_id, h_password]
+
+    proc_query = 'CALL add_employee(?,?,?,?,?,?,?,?,?,?,?,?)'
+
+    try {
+        db.query(proc_query, user_)
+        res.redirect('/')
+    } catch (error) {
+        console.log("Error : Couldn't add employee")
+        alert("Error : Couldn't add employee")
+    }
 }
 
 
