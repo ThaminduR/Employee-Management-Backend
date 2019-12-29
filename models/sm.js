@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 db = new database()
 
-exports.getNEmp = async function (res) {
+exports.getNEmp = async function(res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervices) ORDER BY id ASC"
 
     try {
@@ -19,7 +19,7 @@ exports.getNEmp = async function (res) {
 
 
 
-exports.editEM = async function (req, res) {
+exports.editEM = async function(req, res) {
     user_id = req.body.id
 
     query = "SELECT * FROM employee WHERE id=?"
@@ -168,12 +168,13 @@ exports.editEM = async function (req, res) {
     try {
         db.query(final_query, user_)
     } catch (error) {
-        console, log("Can't edit employee")
+        console,
+        log("Can't edit employee")
     }
     res.redirect('./')
 }
 
-exports.registerEM = async function (req, res) {
+exports.registerEM = async function(req, res) {
 
     first_name = req.body.first_name
     last_name = req.body.last_name
@@ -183,8 +184,7 @@ exports.registerEM = async function (req, res) {
 
     try {
         result = await db.query(query1)
-    } catch (error) {
-    }
+    } catch (error) {}
 
     if (result.length > 0) {
         //check whether this works or not
@@ -239,7 +239,7 @@ exports.registerEM = async function (req, res) {
 
 
 
-exports.editEMView = async function (req, res) {
+exports.editEMView = async function(req, res) {
     user_id = req.query.id
     res.render('sm/editEM.ejs', {
         title: "Edit Employee",
@@ -250,7 +250,7 @@ exports.editEMView = async function (req, res) {
 
 
 
-exports.removeEM = async function (req, res) {
+exports.removeEM = async function(req, res) {
     user_id = req.body.id
     query = 'CALL remove_em(?)'
     try {
@@ -264,7 +264,7 @@ exports.removeEM = async function (req, res) {
 
 
 
-exports.getsupervisors = async function (res) {
+exports.getsupervisors = async function(res) {
     query = "SELECT * FROM employee WHERE id IN (SELECT s_id FROM supervices) ORDER BY id ASC"
 
     try {
@@ -280,7 +280,7 @@ exports.getsupervisors = async function (res) {
 
 
 
-exports.login = async function (req, res) {
+exports.login = async function(req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -306,19 +306,32 @@ exports.login = async function (req, res) {
             res.cookie("authtoken", accessToken)
             res.render('sm/Home.ejs', { title: "Second Management Home" })
             return
-        }
-        else {
+        } else {
             res.send({
                 "code": 204,
                 "failure": "Invalid Credentials !"
             });
             return
         }
-    }
-    else {
+    } else {
         res.send({
             "code": 204,
             "failure": "Invalid ID !"
         })
     }
+}
+
+
+//get department info
+exports.getDept = function(res) {
+    query = "SELECT * FROM department ORDER BY d_id ASC";
+    db.query(query, (err, result) => {
+        if (err) {
+            res.redirect('/');
+        }
+        res.render('department.ejs', {
+            title: 'All Departments',
+            departments: result
+        });
+    });
 }
