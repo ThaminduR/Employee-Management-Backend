@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-exports.authTokenAdmin = function (req, res, next) {
+exports.authTokenAdmin = function(req, res, next) {
     var token = req.cookies["authtoken"]
 
     if (token == null) return res.render("login.ejs")
@@ -18,7 +18,7 @@ exports.authTokenAdmin = function (req, res, next) {
     })
 }
 
-exports.authTokenSM = function (req, res, next) {
+exports.authTokenSM = function(req, res, next) {
     var token = req.cookies["authtoken"]
 
     if (token == null) return res.render("login.ejs")
@@ -35,7 +35,7 @@ exports.authTokenSM = function (req, res, next) {
     })
 }
 
-exports.authTokenUser = function (req, res, next) {
+exports.authTokenUser = function(req, res, next) {
     var token = req.cookies["authtoken"]
 
     if (token == null) return res.render("login.ejs")
@@ -51,7 +51,7 @@ exports.authTokenUser = function (req, res, next) {
 }
 
 
-exports.loggedin = function (req, res, next) {
+exports.loggedin = function(req, res, next) {
     var token = req.cookies['authtoken']
     if (token == null) {
         next()
@@ -68,6 +68,16 @@ exports.loggedin = function (req, res, next) {
                 if (user.user_type == "sm") {
                     res.render("sm/home", {
                         title: "Second Management User"
+                    })
+                }
+                if (user.user_type == "sup") {
+                    res.render("sup/home", {
+                        title: "Supervisor User"
+                    })
+                }
+                if (user.user_type == "nm") {
+                    res.render("employee/home", {
+                        title: "User"
                     })
                 }
             }
