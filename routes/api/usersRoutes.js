@@ -14,4 +14,8 @@ router.get('/logout', (req, res) => {
 router.get('/checkinfo', (req, res) => {
     User.getEmpdat(res, res)
 })
+
+router.get('/addcontact', (req, res) => {
+    res.render('employee/emform.ejs', { title: "Add Emergency Detail" })
+})
 module.exports = router;
