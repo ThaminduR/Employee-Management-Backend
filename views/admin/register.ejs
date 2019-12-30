@@ -103,11 +103,25 @@
                             </div>
                         </div>
 
+                        <!-- Password Comment -->
+                        <div id="password-comment1"></div>
+                        <div id="password-comment2"></div>
+
                         <div class="field-wrap form-group">
                             <label for="password">
                                 Set A Password
                             </label>
                             <input type="password" class="col-md-3 form-control" id="password" name='password' required autocomplete="off" />
+                        </div>
+
+                        <!-- Password Match Comment -->
+                        <div id="con-password-comment"></div>
+
+                        <div class="field-wrap form-group">
+                            <label for="con-password">
+                                Confirm Password
+                            </label>
+                            <input type="password" class="col-md-3 form-control" id="con-password" name='con-password' required autocomplete="off" />
                         </div>
                         <br>
                         <button type="submit" class="btn btn-primary btn-block col-md-3">Register User</button>
@@ -117,6 +131,7 @@
         </div>
     </div>
 </div> <!-- /form -->
+<script src="/views/admin/password-match.js"></script>
 </body>
 
 </html>
