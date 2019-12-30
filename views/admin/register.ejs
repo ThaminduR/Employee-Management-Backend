@@ -2,47 +2,47 @@
 <%- include('sidebar') -%>
 
 <div class="form main">
-    <div class="tab-content container-fluid" style="font-size: 20px;">
+    <div class="tab-content container-fluid" style="font-size: 15px;">
         <br>
-        <div id="signup">
-            <div class="row">
-                <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="signup">
                     <form class="form-horizontal" action="/api/admin/registerSM" method="post">
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                First Name<span class="req">*</span>
+                            <label for="first_name">
+                                First Name
                             </label>
                             <input class="col-md-3 form-control" type="text" id="first_name" name="first_name" required autocomplete="off" />
                         </div>
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                Last Name<span class="req">*</span>
+                            <label for="last_name">
+                                Last Name
                             </label>
                             <input type="text" class="col-md-3 form-control" id="last_name" name="last_name" required autocomplete="off" />
                         </div>
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                Marital Status <span class="req">*</span>
+                            <label for="marital_status">
+                                Marital Status 
                             </label>
-                            <input class="col-md-3 form-control" type="text" name="marital_status" required autocomplete="off" />
+                            <input class="col-md-3 form-control" type="text" id="marital_status" name="marital_status" required autocomplete="off" />
                         </div>
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                Birthday <span class="req">*</span>
+                            <label for="birthday">
+                                Birthday 
                             </label>
-                            <input class="col-md-3 form-control" type="text" name="birthday" required autocomplete="off" />
+                            <input class="col-md-3 form-control" type="text" id="birthday" name="birthday" required autocomplete="off" />
                         </div>
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                Address <span class="req">*</span>
+                            <label for="address">
+                                Address 
                             </label>
-                            <input class="col-md-6 form-control" type="text" name="address" required autocomplete="off" />
+                            <input class="col-md-6 form-control" type="text" id="address" name="address" required autocomplete="off" />
                         </div>
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                Contact Num <span class="req">*</span>
+                            <label for="contact_num">
+                                Contact Num 
                             </label>
-                            <input type="text"  class="col-md-3 form-control" name="contact_num" required autocomplete="off" />
+                            <input type="text"  class="col-md-3 form-control" id="contact_num" name="contact_num" required autocomplete="off" />
                         </div>
                         
                         <!-- Selects Start Here -->
@@ -100,10 +100,10 @@
                         </div>
 
                         <div class="field-wrap form-group">
-                            <label class="col-md-3 control-label">
-                                Set A Password<span class="req">*</span>
+                            <label for="password">
+                                Set A Password
                             </label>
-                            <input type="password" class="col-md-3 form-control" name='password' required autocomplete="off" />
+                            <input type="password" class="col-md-3 form-control" id="password" name='password' required autocomplete="off" />
                         </div>
                         <button type="submit" class="btn btn-primary button-block">Register User</button>
                     </form>
