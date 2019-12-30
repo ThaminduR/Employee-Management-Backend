@@ -28,7 +28,7 @@
                 <td><%= user.birthday %></td>
                 <td><%= user.address %></td>
                 <td><%= user.contact_num %></td>
-                <td><button id="rmbutton" onClick=removeSM("<%= user.id %>")>Remove</button></td>
+                <td><button class="btn btn-outline-danger" id="rmbutton" onClick=removeSM("<%= user.id %>")>Remove</button></td>
             </tr>
             <% }) %>
         </tbody>
