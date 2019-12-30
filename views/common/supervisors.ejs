@@ -1,6 +1,6 @@
 <%- include('../partial/header') -%>
 
-<div class="container">
+<div class="container-fluid">
     <div class="table-wrapper main">
         <% if (users.length > 0) {%>
             <table class="table table-hovered">
@@ -28,7 +28,7 @@
                         <td><%= user.birthday %></td>
                         <td><%= user.address %></td>
                         <td><%= user.contact_num %></td>
-                        <td><button class="btn btn-default" id="rmbutton" onClick=removeEM("<%= user.id %>")>Remove</button></td>
+                        <td><button class="btn btn-default" id="rmbutton" onClick=removeEM()"<%= user.id %>")>Remove</button></td>
                     </tr>
                     <% }) %>
                 </tbody>
