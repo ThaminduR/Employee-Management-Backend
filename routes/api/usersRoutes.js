@@ -11,4 +11,7 @@ router.get('/logout', (req, res) => {
     User.logout(req, res)
 })
 
+router.get('/checkinfo', (req, res) => {
+    User.getEmpdat(res, res)
+})
 module.exports = router;
