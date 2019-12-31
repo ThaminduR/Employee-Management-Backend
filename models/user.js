@@ -105,7 +105,6 @@ exports.saveDepInfo = async function(req, res) {
 
     try {
         await db.query(query, [id, fullname, birthday, relationship, contactnum])
->>>>>>> c72bd8d3df848534e5e517a32ec9166bb1d51218
         res.redirect('/')
     } catch (error) {
         console.log(error)
