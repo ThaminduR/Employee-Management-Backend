@@ -16,6 +16,10 @@ router.get('/addcontact', auth.authTokenUser, (req, res) => {
     res.render('employee/emform.ejs', { title: "Add Emergency Detail" })
 })
 
+router.get('/requestleave', auth.authTokenUser, (req, res) => {
+    res.render('employee/leave.ejs', { title: "Request Leave" })
+})
+
 
 router.post('/saveEmDet', auth.authTokenUser, (req, res) => {
     User.saveEmDet(req, res)

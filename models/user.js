@@ -79,3 +79,18 @@ exports.saveEmDet = async function(req, res) {
         console.log(error)
     }
 }
+exports.reqLeave = async function(req, res) {
+    type = req.body.leavetype
+    detail = req.body.detail
+    date=req.body.leavedate
+    id = req.user.user_id
+
+    query = "INSERT INTO requested VALUES (?,?,?,?)"
+
+    try {
+        await db.query(query, [id, type, detail,date])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}

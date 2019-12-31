@@ -1,0 +1,32 @@
+<%- include('../partial/header') -%>
+<%- include('sidebar') -%>
+
+   <div class="main">
+   <b><h1 style="font-size:xx-large;"></h1></b>
+       <h2> Request a Leave</h2>
+       <form action="/api/user/reqLeave" method="post">
+                   <div class="form-group">
+                       <div class="field-wrap"></label>
+                           <input type="text" name='leavetype' class="form-control" placeholder="Leave Type" id="type-input" required autocomplete="off" required autofocus />
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <div class="field-wrap">
+                           <label for="pass-input" class="sr-only"> Leave Detail
+                           </label>
+                           <input type="text" name='detail' class="form-control" placeholder="Leave Detail" id="detail-input" required autocomplete="off" required />
+                       </div>
+                   </div>
+                   <div class="form-group">
+                    <div class="field-wrap">
+                        <label for="pass-input" class="sr-only">Leave Date
+                        </label>
+                        <input type="text" name='leavedate' class="form-control" placeholder="Leave Date DD/MM/YYYY" id="date-input" required autocomplete="off" required />
+                    </div>
+                </div>
+                   <button type=submit class="btn btn-primary button btn-block" >Submit</button>
+       </form>
+   </div>
+
+   </body>
+   </html>
