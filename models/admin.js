@@ -92,7 +92,7 @@ exports.removeSM = async function(req, res) {
     user_id = req.body.id
     query = 'CALL remove_sm(?)'
     try {
-        db.query(query, [user_id])
+        await db.query(query, [user_id])
         res.redirect('/')
     } catch (error) {
         console.log(error)

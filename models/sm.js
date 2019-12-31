@@ -347,6 +347,41 @@ exports.removeSup = async function (req, res) {
 }
 
 
+exports.user_dept = async function (res) {
+    query = "SELECT name as Department, GROUP_CONCAT(e_id) as Employees, count(e_id) as Count FROM employee_department GROUP BY name"
+
+    try {
+        result = await db.query(query)
+        res.render('report/userDept', { departments: result })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.user_job = async function (res) {
+    query = 'SELECT title as Job, GROUP_CONCAT(e_id) as Employees, count(e_id) as Count FROM employee_jobtitle GROUP BY title'
+
+    try {
+        result = await db.query(query)
+        res.render('report/userJob', { jobs: result })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.user_pay = async function (res) {
+    query = 'SELECT paygrade_name as Pay_Grade , GROUP_CONCAT(e_id) as Employees, count(e_id) as Count FROM employee_paygrade GROUP BY paygrade_name'
+
+    try {
+        result = await db.query(query)
+        res.render('report/userPay', { PayGs: result })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
 exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
