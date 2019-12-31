@@ -6,7 +6,7 @@ db = new database()
 
 
 
-exports.getSM = async function (res) {
+exports.getSM = async function(res) {
     query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
 
     try {
@@ -17,11 +17,11 @@ exports.getSM = async function (res) {
         })
     } catch (error) {
         console.log(error)
-        
+
     }
 }
 
-exports.registerSM = async function (req, res) {
+exports.registerSM = async function(req, res) {
 
     first_name = req.body.first_name
     last_name = req.body.last_name
@@ -84,11 +84,11 @@ exports.registerSM = async function (req, res) {
     } catch (error) {
         console.log(error)
         console.log("Error : Couldn't add employee")
-        
+
     }
 }
 
-exports.removeSM = async function (req, res) {
+exports.removeSM = async function(req, res) {
     user_id = req.body.id
     query = 'CALL remove_sm(?)'
     try {
@@ -101,7 +101,7 @@ exports.removeSM = async function (req, res) {
 }
 
 
-exports.login = async function (req, res) {
+exports.login = async function(req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM admin_details WHERE id = ?'
@@ -125,22 +125,36 @@ exports.login = async function (req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            //res.render('admin/adminHome.ejs', { title: "Admin Home" })
+                //res.render('admin/adminHome.ejs', { title: "Admin Home" })
             res.redirect('/')
             return
-        }
-        else {
+        } else {
             res.send({
                 "code": 204,
                 "failure": "Invalid Credentials !"
             });
             return
         }
-    }
-    else {
+    } else {
         res.send({
             "code": 204,
             "failure": "Invalid ID !"
         })
+    }
+}
+
+
+//to add custom fields to databse
+exports.addcustom = async function(req, res) {
+    id = req.body.id
+    attribute = req.body.attribute
+
+    query = "INSERT INTO additional_details VALUES (?,?)"
+
+    try {
+        await db.query(query, [id, attribute])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
     }
 }

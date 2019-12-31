@@ -35,7 +35,13 @@ router.post('/removeEM', auth.authTokenAdmin, (req, res) => {
     SecM.removeEM(req, res)
 })
 
+//routes to add custom fields
+router.get('/addfields', auth.authTokenAdmin, (req, res) => {
+    res.render("admin/addfields", { title: "Add Custom Fields" })
+})
 
-
+router.post('/addcustom', auth.authTokenAdmin, (req, res) => {
+    Admin.addcustom(req, res)
+})
 
 module.exports = router
