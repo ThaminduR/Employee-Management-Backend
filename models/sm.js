@@ -304,7 +304,7 @@ exports.login = async function(req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('sm/Home.ejs', { title: "Second Management Home" })
+            res.render('sm/home.ejs', { title: "Second Management Home" })
             return
         } else {
             res.send({
@@ -335,3 +335,4 @@ exports.getDept = function(res) {
         });
     });
 }
+
