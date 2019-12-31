@@ -89,18 +89,12 @@ exports.reqLeave = async function (req, res) {
 
     try {
         await db.query(query, [id, type, detail, date])
-<<<<<<< HEAD
         res.redirect('/')
-=======
->>>>>>> db6cb9b31a75402c4b49d17c08a2ac88225e3b39
     } catch (error) {
         console.log(error)
     }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> db6cb9b31a75402c4b49d17c08a2ac88225e3b39
 
 
 exports.saveDepInfo = async function (req, res) {
