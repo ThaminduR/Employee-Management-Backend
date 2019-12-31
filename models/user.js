@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 db = new database()
 
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -44,28 +44,28 @@ exports.login = async function(req, res) {
     }
 }
 
-exports.logout = function(req, res) {
+exports.logout = function (req, res) {
     res.cookie('authtoken', { maxAge: Date.now() })
     res.redirect('/login')
 }
 
 //function to print employee data
 
-exports.getEmpdat = async function(res) {
-        query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
+exports.getEmpdat = async function (res) {
+    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
 
-        try {
-            result = await db.query(query)
-            res.render('employee/info.ejs', {
-                title: "Employee Details",
-                users: result
-            })
-        } catch (error) {
-            console.log(error)
-        }
+    try {
+        result = await db.query(query)
+        res.render('employee/info.ejs', {
+            title: "Employee Details",
+            users: result
+        })
+    } catch (error) {
+        console.log(error)
     }
-    //to save emergency details
-exports.saveEmDet = async function(req, res) {
+}
+//to save emergency details
+exports.saveEmDet = async function (req, res) {
     fullname = req.body.fullname
     contactnum = req.body.contactnum
     id = req.user.user_id
@@ -79,22 +79,23 @@ exports.saveEmDet = async function(req, res) {
         console.log(error)
     }
 }
-<<<<<<< HEAD
-exports.reqLeave = async function(req, res) {
+exports.reqLeave = async function (req, res) {
     type = req.body.leavetype
     detail = req.body.detail
-    date=req.body.leavedate
+    date = req.body.leavedate
     id = req.user.user_id
 
     query = "INSERT INTO requested VALUES (?,?,?,?)"
 
     try {
-        await db.query(query, [id, type, detail,date])
-=======
+        await db.query(query, [id, type, detail, date])
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
-
-exports.saveDepInfo = async function(req, res) {
+exports.saveDepInfo = async function (req, res) {
     fullname = req.body.fullname
     birthday = req.body.birthday
     relationship = req.body.relationship
@@ -105,7 +106,6 @@ exports.saveDepInfo = async function(req, res) {
 
     try {
         await db.query(query, [id, fullname, birthday, relationship, contactnum])
->>>>>>> c72bd8d3df848534e5e517a32ec9166bb1d51218
         res.redirect('/')
     } catch (error) {
         console.log(error)
