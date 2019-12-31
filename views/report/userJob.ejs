@@ -1,0 +1,27 @@
+<div class="table-wrapper main">
+    <% if (jobs.length > 0) {%>
+    <table class="table table-hovered" border="1">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Job</th>
+                <th scope="col">Employees</th>
+                <th scope="col">Number of Employees</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% jobs.forEach(function(job, index){ %>
+            <tr>
+                <td><%= job.Job %></td>
+                <td><%= job.Employees %></td>
+                <td><%= job.Count %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+    <p class="text-center">No records found.</p>
+    <% } %>
+</div>
+</body>
+
+</html>

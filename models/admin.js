@@ -100,16 +100,6 @@ exports.removeSM = async function (req, res) {
     }
 }
 
-exports.user_dept = async function (req, res) {
-    query = "SELECT GROUP_CONCAT(e_id) FROM employee_department GROUP BY name"
-
-    try {
-        result = await db.query(query)
-        res.render('/admin/userDept', { data: result })
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 exports.login = async function (req, res) {
     user_id = req.body.user_id

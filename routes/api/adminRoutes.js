@@ -40,7 +40,15 @@ router.get('/reports', auth.authTokenAdmin, (req, res) => {
 })
 
 router.get('/userDept', auth.authTokenAdmin, (req, res) => {
-    Admin.user_dept(res)
+    SecM.user_dept(res)
 })
+router.get('/userJob', auth.authTokenAdmin, (req, res) => {
+    SecM.user_job(res)
+})
+
+router.get('/userPay', auth.authTokenAdmin, (req, res) => {
+    SecM.user_pay(res)
+})
+
 
 module.exports = router

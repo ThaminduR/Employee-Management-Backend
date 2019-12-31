@@ -1,0 +1,27 @@
+<div class="table-wrapper main">
+    <% if (departments.length > 0) {%>
+    <table class="table table-hovered" border="1">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Department</th>
+                <th scope="col">Employees</th>
+                <th scope="col">Number of Employees</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% departments.forEach(function(department, index){ %>
+            <tr>
+                <td><%= department.Department %></td>
+                <td><%= department.Employees %></td>
+                <td><%= department.Count %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% } else { %>
+    <p class="text-center">No records found.</p>
+    <% } %>
+</div>
+</body>
+
+</html>
