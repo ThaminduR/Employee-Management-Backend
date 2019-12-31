@@ -40,7 +40,7 @@ router.get('/reports', auth.authTokenAdmin, (req, res) => {
 })
 
 router.get('/userDept', auth.authTokenAdmin, (req, res) => {
-    res.render('admin/user_dept.ejs')
+    Admin.user_dept(res)
 })
 
 module.exports = router
