@@ -17,7 +17,7 @@ exports.getSM = async function (res) {
         })
     } catch (error) {
         console.log(error)
-        
+
     }
 }
 
@@ -84,7 +84,7 @@ exports.registerSM = async function (req, res) {
     } catch (error) {
         console.log(error)
         console.log("Error : Couldn't add employee")
-        
+
     }
 }
 
@@ -92,7 +92,7 @@ exports.removeSM = async function (req, res) {
     user_id = req.body.id
     query = 'CALL remove_sm(?)'
     try {
-        db.query(query, [user_id])
+        await db.query(query, [user_id])
         res.redirect('/')
     } catch (error) {
         console.log(error)
@@ -100,6 +100,16 @@ exports.removeSM = async function (req, res) {
     }
 }
 
+exports.user_dept = async function (req, res) {
+    query = "SELECT GROUP_CONCAT(e_id) FROM employee_department GROUP BY name"
+
+    try {
+        result = await db.query(query)
+        res.render('/admin/userDept', { data: result })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 exports.login = async function (req, res) {
     user_id = req.body.user_id

@@ -35,7 +35,12 @@ router.post('/removeEM', auth.authTokenAdmin, (req, res) => {
     SecM.removeEM(req, res)
 })
 
+router.get('/reports', auth.authTokenAdmin, (req, res) => {
+    res.render('admin/reports', { title: "Reports" })
+})
 
-
+router.get('/userDept', auth.authTokenAdmin, (req, res) => {
+    Admin.user_dept(res)
+})
 
 module.exports = router

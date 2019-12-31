@@ -24,4 +24,12 @@ router.get('/requestleave', auth.authTokenUser, (req, res) => {
 router.post('/saveEmDet', auth.authTokenUser, (req, res) => {
     User.saveEmDet(req, res)
 })
+
+router.get('/adddependant', auth.authTokenUser, (req, res) => {
+    res.render('employee/depform.ejs', { title: "Add Dependant Information" })
+})
+
+router.post('/saveDepInfo', auth.authTokenUser, (req, res) => {
+    User.saveDepInfo(req, res)
+})
 module.exports = router;
