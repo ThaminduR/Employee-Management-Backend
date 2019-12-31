@@ -4,18 +4,6 @@ const jwt = require('jsonwebtoken')
 
 db = new database()
 
-// exports.getReqLeaves = async function (req, res) {
-//     user_id = req.body.user_id;
-//     query = 'SELECT * FROM taken WHERE e_id=(SELECT e_id FROM employee NATURAL JOIN supervices WHERE s_id=?) '
-//     try {
-//         result = await db.query(query, [user_id]);
-
-//     } catch (error) {
-//         res.redirect('/')
-//     }
-
-// }
-
 exports.getEmp = async function(res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT sup_id FROM supervisors) AND id NOT IN (SELECT e_id FROM supervises) ORDER BY id ASC"
 
