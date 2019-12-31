@@ -15,8 +15,8 @@ router.get('/registerEM', auth.authTokenSM, (req, res) => {
 })
 
 //register the users
-router.post('/registerSM', auth.authTokenSM, (req, res) => {
-    SecM.registerEM(reeq, res)
+router.post('/registerEM', auth.authTokenSM, (req, res) => {
+    SecM.registerEM(req, res)
 })
 
 router.get('/editEM', auth.authTokenSM, (req, res) => {
@@ -41,7 +41,12 @@ router.get('/addSup', auth.authTokenSM, (req, res) => {
 })
 
 router.post('/addSup', auth.authTokenSM, (req, res) => {
-    SecM.addsupervisors(req,res)
+    SecM.addsupervisors(req, res)
+})
+
+router.post('/removeSup', auth.authTokenSM, (req, res) => {
+
+    SecM.removeSup(req, res)
 })
 
 module.exports = router

@@ -8,6 +8,10 @@ router.get('/allNEmp', auth.authTokenSup, (req, res) => {
     Sup.getEmp(res)
 })
 
+router.post('/addEtoS', auth.authTokenSup, (req, res) => {
+    Sup.addEtoS(req, res)
+})
+
 module.exports = router
 
 

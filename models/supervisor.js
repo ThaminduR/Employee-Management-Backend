@@ -4,14 +4,28 @@ const jwt = require('jsonwebtoken')
 db = new database()
 
 exports.getEmp = async function (res) {
-    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
+    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT sup_id FROM supervisors) AND id NOT IN (SELECT e_id FROM supervises) ORDER BY id ASC"
 
     try {
         result = await db.query(query)
         res.render('sup/users.ejs', {
-            title: "All Users",
+            title: "Users",
             users: result
         })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.addEtoS = async function (req, res) {
+    user_id = req.user.user_id
+    id = req.body.id
+
+    query = " INSERT INTO supervises VALUES (?,?)"
+
+    try {
+        await db.query(query, [user_id, id])
+        res.redirect('/')
     } catch (error) {
         console.log(error)
     }

@@ -207,22 +207,40 @@ exports.registerEM = async function (req, res) {
 
     dept = req.body.department
     query_dept = 'SELECT d_id FROM department WHERE name = ?'
-    result_Dept = await db.query(query_dept, [dept])
+    try {
+        result_Dept = await db.query(query_dept, [dept])
+    } catch (error) {
+        console.log(error)
+    }
     D_id = result_Dept[0].d_id
+
 
     j_title = req.body.job_title
     query_j = 'SELECT j_id FROM jobtitle WHERE title = ?'
-    result_j = await db.query(query_j, [j_title])
+    try {
+        result_j = await db.query(query_j, [j_title])
+    } catch (error) {
+        console.log(error)
+    }
     j_id = result_j[0].j_id
+
 
     pay_grade = req.body.pay_grade
     query_p = 'SELECT p_id FROM paygrade WHERE paygrade_name = ?'
-    result_p = await db.query(query_p, [pay_grade])
-    p_id = result_p[0].pg_id
+    try {
+        result_p = await db.query(query_p, [pay_grade])
+    } catch (error) {
+        console.log(error)
+    }
+    p_id = result_p[0].p_id
 
     emp_status = req.body.emp_status
     query_e = 'SELECT status_id FROM employment_status WHERE type = ? '
-    result_e = await db.query(query_e, [emp_status])
+    try {
+        result_e = await db.query(query_e, [emp_status])
+    } catch (error) {
+        console.log(error)
+    }
     status_id = result_e[0].status_id
 
     firstname = req.body.first_name
@@ -312,6 +330,19 @@ exports.addsupervisors = async function (req, res) {
         res.redirect('/')
     } catch (error) {
         console.log(error)
+    }
+}
+
+exports.removeSup = async function (req, res) {
+    user_id = req.body.id
+    query = 'DELETE FROM supervisors WHERE sup_id = ?'
+    try {
+
+        db.query(query, [user_id])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+        console.log("Error : Couldn't remove supervisor")
     }
 }
 

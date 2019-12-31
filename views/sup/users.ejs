@@ -3,6 +3,8 @@
 
 <div class="container-fluid">
     <div class="table-wrapper main">
+    <span>Employees who don't have a supervisor is listed here</span>
+    <br></br>
         <% if (users.length > 0) {%>
             <table class="table table-hovered">
                 <thead class="thead-dark">
@@ -19,6 +21,7 @@
                         <th scope="col">Job</th>
                         <th scope="col">Type</th>
                         <th scope="col">Pay Grade</th>
+                        <th scope="col"></th>
         
                     </tr>
                 </thead>
@@ -36,6 +39,7 @@
                         <td><%= user.title %></td>
                         <td><%= user.type %></td>
                         <td><%= user.paygrade_name %></td>
+                        <td><button class="btn btn-outline-warning" id="addbutton" onClick=addE("<%= user.id %>")>Add to me</button></td>
                     </tr>
                     <% }) %>
                 </tbody>
@@ -45,7 +49,20 @@
             <% } %>
     </div>
 </div>
-
+<script>
+        function addE(id){
+            $.ajax({
+                type: 'POST',
+                url: 'addEtoS',
+                data: {
+                    "id": id
+                },
+                success: function (result) {
+                    //location.reload();
+                }
+            });
+        }
+</script>
 </body>
 
 </html>
