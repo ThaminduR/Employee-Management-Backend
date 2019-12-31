@@ -30,11 +30,12 @@ exports.login = async function (req, res) {
     }
 
     //checks for supervisor users and logs them
-    sup_query = "SELECT * FROM supervices WHERE s_id = ?"
+    sup_query = "SELECT * FROM supervisors WHERE sup_id = ?"
 
     try {
         result1 = await db.query(sup_query, [user_id])
     } catch (error) {
+        console.log(error)
         console.log("Error - Sup query")
     }
 

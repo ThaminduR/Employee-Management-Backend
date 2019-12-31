@@ -52,7 +52,7 @@ exports.logout = function(req, res) {
 //function to print employee data
 
 exports.getEmpdat = async function(res) {
-    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervices) ORDER BY id ASC"
+    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
 
     try {
         result = await db.query(query)
@@ -61,6 +61,6 @@ exports.getEmpdat = async function(res) {
             users: result
         })
     } catch (error) {
-        res.redirect('/')
+        console.log(error)
     }
 }

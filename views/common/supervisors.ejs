@@ -1,4 +1,5 @@
 <%- include('../partial/header') -%>
+<%- include('sidebar') -%>
 
 <div class="container-fluid">
     <div class="table-wrapper main">
@@ -28,7 +29,7 @@
                         <td><%= user.birthday %></td>
                         <td><%= user.address %></td>
                         <td><%= user.contact_num %></td>
-                        <td><button class="btn btn-outline-danger" id="rmbutton" onClick=removeEM()"<%= user.id %>")>Remove</button></td>
+                        <td><button class="btn btn-outline-danger" id="rmbutton" onClick=removeSup("<%= user.id %>")>Remove</button></td>
                     </tr>
                     <% }) %>
                 </tbody>
@@ -39,7 +40,7 @@
     </div>
 </div>
 <script>
-        function removeEM(id){
+        function removeSup(id){
             $.ajax({
                 type: 'POST',
                 url: 'removeSUP',
