@@ -380,7 +380,16 @@ exports.user_pay = async function (res) {
     }
 }
 
-
+exports.searchId = async function (req, res) {
+    query = "SELECT * FROM employee_details WHERE id = ?"
+    id = req.body.id
+    try {
+        result = await db.query(query, [id])
+        res.send(result[0])
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 exports.login = async function (req, res) {
     user_id = req.body.user_id

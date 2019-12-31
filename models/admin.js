@@ -36,7 +36,6 @@ exports.registerSM = async function (req, res) {
     }
 
     if (result.length > 0) {
-        //check whether this works or not
         str = result[0].id;
         temp_str = str.slice(3);
         n = parseInt(temp_str) + 1;
@@ -83,7 +82,7 @@ exports.registerSM = async function (req, res) {
         res.redirect('/')
     } catch (error) {
         console.log(error)
-        console.log("Error : Couldn't add employee")
+        
 
     }
 }
@@ -97,6 +96,18 @@ exports.removeSM = async function (req, res) {
     } catch (error) {
         console.log(error)
         console.log("Error : Couldn't add employee")
+    }
+}
+
+exports.searchId = async function (req, res) {
+    query = "SELECT * FROM employee_details WHERE id = ?"
+    id = req.body.id
+    try {
+        result = await db.query(query, [id])
+        //console.log(result[0])
+        res.send(result[0])
+    } catch (error) {
+        console.log(error)
     }
 }
 

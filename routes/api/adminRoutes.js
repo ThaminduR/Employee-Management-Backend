@@ -50,5 +50,11 @@ router.get('/userPay', auth.authTokenAdmin, (req, res) => {
     SecM.user_pay(res)
 })
 
+router.get('/search', auth.authTokenAdmin, (req, res) => {
+    res.render('admin/search', { title: "Search Employee" })
+})
 
+router.post('/search', auth.authTokenAdmin, (req, res) => {
+    Admin.searchId(req, res)
+})
 module.exports = router
