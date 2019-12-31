@@ -8,11 +8,11 @@ router.get('/logout', (req, res) => {
     User.logout(req, res)
 })
 
-router.get('/checkinfo', authTokenUser, (req, res) => {
+router.get('/checkinfo', auth.authTokenUser, (req, res) => {
     User.getEmpdat(res, res)
 })
 
-router.get('/addcontact', authTokenUser, (req, res) => {
+router.get('/addcontact', auth.authTokenUser, (req, res) => {
     res.render('employee/emform.ejs', { title: "Add Emergency Detail" })
 })
 
