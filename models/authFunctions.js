@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-exports.authTokenAdmin = function(req, res, next) {
+exports.authTokenAdmin = function (req, res, next) {
     var token = req.cookies["authtoken"]
 
     if (token == null) return res.render("login.ejs")
@@ -18,7 +18,27 @@ exports.authTokenAdmin = function(req, res, next) {
     })
 }
 
-exports.authTokenSM = function(req, res, next) {
+exports.authTokenSM = function (req, res, next) {
+    var token = req.cookies["authtoken"]
+    
+    if (token == null) return res.render("login.ejs")
+
+    jwt.verify(token, process.env.SECRET, (err, user) => {
+        
+        if (err) {
+            res.redirect('/login')
+        } else {
+            req.user = user
+            if (user.user_type == "sm") {
+
+                next()
+
+            }
+        }
+    })
+}
+
+exports.authTokenSup = function (req, res, next) {
     var token = req.cookies["authtoken"]
 
     if (token == null) return res.render("login.ejs")
@@ -28,14 +48,14 @@ exports.authTokenSM = function(req, res, next) {
             res.redirect('/login')
         } else {
             req.user = user
-            if (user.user_type == "sm") {
+            if (user.user_type == "sup") {
                 next()
             }
         }
     })
 }
 
-exports.authTokenUser = function(req, res, next) {
+exports.authTokenUser = function (req, res, next) {
     var token = req.cookies["authtoken"]
 
     if (token == null) return res.render("login.ejs")
@@ -45,13 +65,15 @@ exports.authTokenUser = function(req, res, next) {
             res.redirect('/login')
         } else {
             req.user = user
-            next()
+            if (user.user_type == "nm") {
+                next()
+            }
         }
     })
 }
 
 
-exports.loggedin = function(req, res, next) {
+exports.loggedin = function (req, res, next) {
     var token = req.cookies['authtoken']
     if (token == null) {
         next()

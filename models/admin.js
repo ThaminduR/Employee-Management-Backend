@@ -16,7 +16,8 @@ exports.getSM = async function (res) {
             users: result
         })
     } catch (error) {
-        res.redirect('/')
+        console.log(error)
+        
     }
 }
 
@@ -31,6 +32,7 @@ exports.registerSM = async function (req, res) {
     try {
         result = await db.query(query1)
     } catch (error) {
+        console.log(error)
     }
 
     if (result.length > 0) {
@@ -80,8 +82,9 @@ exports.registerSM = async function (req, res) {
         db.query(query, ["admin", id])
         res.redirect('/')
     } catch (error) {
+        console.log(error)
         console.log("Error : Couldn't add employee")
-        alert("Error : Couldn't add employee")
+        
     }
 }
 
@@ -92,8 +95,8 @@ exports.removeSM = async function (req, res) {
         db.query(query, [user_id])
         res.redirect('/')
     } catch (error) {
+        console.log(error)
         console.log("Error : Couldn't add employee")
-        alert("Error : Couldn't add employee")
     }
 }
 

@@ -6,6 +6,7 @@ const User = require('../../models/user')
 
 router.get('/allNEmp', auth.authTokenSM, (req, res) => {
     SecM.getNEmp(res)
+
 })
 
 //view of register the users
@@ -14,8 +15,8 @@ router.get('/registerEM', auth.authTokenSM, (req, res) => {
 })
 
 //register the users
-router.post('/registerSM', auth.authTokenSM, (req, res) => {
-    SecM.registerEM(reeq, res)
+router.post('/registerEM', auth.authTokenSM, (req, res) => {
+    SecM.registerEM(req, res)
 })
 
 router.get('/editEM', auth.authTokenSM, (req, res) => {
@@ -33,6 +34,19 @@ router.post('/removeEM', auth.authTokenSM, (req, res) => {
 
 router.get('/allSups', auth.authTokenSM, (req, res) => {
     SecM.getsupervisors(res)
+})
+
+router.get('/addSup', auth.authTokenSM, (req, res) => {
+    SecM.viewaddsupervisors(res)
+})
+
+router.post('/addSup', auth.authTokenSM, (req, res) => {
+    SecM.addsupervisors(req, res)
+})
+
+router.post('/removeSup', auth.authTokenSM, (req, res) => {
+
+    SecM.removeSup(req, res)
 })
 
 module.exports = router
