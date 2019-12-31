@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 
 db = new database()
 
-exports.getNEmp = async function(res) {
-    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervices) ORDER BY id ASC"
+exports.getNEmp = async function (res) {
+    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
 
     try {
         result = await db.query(query)
@@ -13,19 +13,20 @@ exports.getNEmp = async function(res) {
             users: result
         })
     } catch (error) {
-        res.redirect('/')
+        console.log(error)
     }
 }
 
 
 
-exports.editEM = async function(req, res) {
+exports.editEM = async function (req, res) {
     user_id = req.body.id
 
     query = "SELECT * FROM employee WHERE id=?"
     try {
         result = await db.query(query, [user_id])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -76,6 +77,7 @@ exports.editEM = async function(req, res) {
     try {
         result_d = await db.query(query, [user_id])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -84,6 +86,7 @@ exports.editEM = async function(req, res) {
         result_d = await db.query(query, [user_id])
         dept_id = await db.query(query2, [req.body.department])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -99,6 +102,7 @@ exports.editEM = async function(req, res) {
     try {
         result_j = await db.query(query, [user_id])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -107,6 +111,7 @@ exports.editEM = async function(req, res) {
         result_d = await db.query(query, [user_id])
         job_id = await db.query(query2, [req.body.job_title])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -122,6 +127,7 @@ exports.editEM = async function(req, res) {
     try {
         result_p = await db.query(query, [user_id])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -130,6 +136,7 @@ exports.editEM = async function(req, res) {
         result_d = await db.query(query, [user_id])
         pay_id = await db.query(query2, [req.body.pay_grade])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -145,6 +152,7 @@ exports.editEM = async function(req, res) {
     try {
         result_s = await db.query(query, [user_id])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -153,6 +161,7 @@ exports.editEM = async function(req, res) {
         result_d = await db.query(query, [user_id])
         temp_status_id = await db.query(query2, [req.body.emp_status])
     } catch (error) {
+        console.log(error)
         console.log("Error occured in EditEM function !")
     }
 
@@ -168,13 +177,13 @@ exports.editEM = async function(req, res) {
     try {
         db.query(final_query, user_)
     } catch (error) {
-        console,
-        log("Can't edit employee")
+        console.log(error)
+        console.log("Can't edit employee")
     }
     res.redirect('./')
 }
 
-exports.registerEM = async function(req, res) {
+exports.registerEM = async function (req, res) {
 
     first_name = req.body.first_name
     last_name = req.body.last_name
@@ -184,7 +193,7 @@ exports.registerEM = async function(req, res) {
 
     try {
         result = await db.query(query1)
-    } catch (error) {}
+    } catch (error) { console.log(error) }
 
     if (result.length > 0) {
         //check whether this works or not
@@ -232,14 +241,15 @@ exports.registerEM = async function(req, res) {
         db.query(proc_query, user_)
         res.redirect('/')
     } catch (error) {
+        console.log(error)
         console.log("Error : Couldn't add employee")
-        alert("Error : Couldn't add employee")
+
     }
 }
 
 
 
-exports.editEMView = async function(req, res) {
+exports.editEMView = async function (req, res) {
     user_id = req.query.id
     res.render('sm/editEM.ejs', {
         title: "Edit Employee",
@@ -250,22 +260,22 @@ exports.editEMView = async function(req, res) {
 
 
 
-exports.removeEM = async function(req, res) {
+exports.removeEM = async function (req, res) {
     user_id = req.body.id
     query = 'CALL remove_em(?)'
     try {
         db.query(query, [user_id])
         res.redirect('/')
     } catch (error) {
+        console.log(error)
         console.log("Error : Couldn't remove employee")
-        alert("Error : Couldn't remove employee")
     }
 }
 
 
 
-exports.getsupervisors = async function(res) {
-    query = "SELECT * FROM employee WHERE id IN (SELECT s_id FROM supervices) ORDER BY id ASC"
+exports.getsupervisors = async function (res) {
+    query = "SELECT * FROM employee WHERE id IN (SELECT sup_id FROM supervisors) ORDER BY id ASC"
 
     try {
         result = await db.query(query)
@@ -274,13 +284,39 @@ exports.getsupervisors = async function(res) {
             users: result
         })
     } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.viewaddsupervisors = async function (res) {
+    query = "SELECT e_id FROM employee_job WHERE j_id = 1 AND e_id NOT IN (SELECT sup_id FROM supervisors) AND e_id NOT IN (SELECT u_id FROM admin_user)"
+
+    try {
+        result = await db.query(query)
+        res.render('sm/addsup.ejs', {
+            title: "Add Supervisor",
+            sups: result
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.addsupervisors = async function (req, res) {
+    sup_id = req.body.id
+    user_id = req.user.user_id
+    query = "INSERT INTO supervisors VALUES (?,?)"
+
+    try {
+        await db.query(query, [user_id, sup_id])
         res.redirect('/')
+    } catch (error) {
+        console.log(error)
     }
 }
 
 
-
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -323,7 +359,7 @@ exports.login = async function(req, res) {
 
 
 //get department info
-exports.getDept = function(res) {
+exports.getDept = function (res) {
     query = "SELECT * FROM department ORDER BY d_id ASC";
     db.query(query, (err, result) => {
         if (err) {

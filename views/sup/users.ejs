@@ -19,8 +19,6 @@
                         <th scope="col">Job</th>
                         <th scope="col">Type</th>
                         <th scope="col">Pay Grade</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
         
                     </tr>
                 </thead>
@@ -38,9 +36,6 @@
                         <td><%= user.title %></td>
                         <td><%= user.type %></td>
                         <td><%= user.paygrade_name %></td>
-                        <td><button class="btn btn-outline-warning" id="editbutton" onClick=editEM("<%= user.id %>")>Edit</button></td>
-                        <td><button class="btn btn-outline-danger" id="rmbutton" onClick=removeEM("<%= user.id %>")>Remove</button></td>
-                        
                     </tr>
                     <% }) %>
                 </tbody>
@@ -50,34 +45,6 @@
             <% } %>
     </div>
 </div>
-<script>
-        function removeEM(id){
-            $.ajax({
-                type: 'POST',
-                url: 'removeEM',
-                data: {
-                    "id": id
-                },
-                success: function (result) {
-                    location.reload();
-                }
-            });
-        }
-
-        function editEM(id){
-            $.ajax({
-                type: 'GET',
-                url: 'editEM',
-                data: {
-                    "id": id
-                },
-                success(data){
-                    $(".main").html(data)
-                }
-            });
-        }
-
-</script>
 
 </body>
 
