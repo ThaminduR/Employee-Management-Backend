@@ -71,7 +71,6 @@ exports.login = async function(req, res) {
             "failure": "Invalid ID !"
         })
     }
-<<<<<<< HEAD
 }
 
 exports.getReqLeaves = async function (req, res) {
@@ -83,6 +82,4 @@ exports.getReqLeaves = async function (req, res) {
 
     } catch (error) { }
 }
-=======
-}
->>>>>>> c72bd8d3df848534e5e517a32ec9166bb1d51218
+

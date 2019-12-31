@@ -35,12 +35,35 @@ router.post('/removeEM', auth.authTokenAdmin, (req, res) => {
     SecM.removeEM(req, res)
 })
 
+//routes to add custom fields
+router.get('/addfields', auth.authTokenAdmin, (req, res) => {
+    res.render("admin/addfields", { title: "Add Custom Fields" })
+})
+
+router.post('/addcustom', auth.authTokenAdmin, (req, res) => {
+    Admin.addcustom(req, res)
+})
+
 router.get('/reports', auth.authTokenAdmin, (req, res) => {
     res.render('admin/reports', { title: "Reports" })
 })
 
 router.get('/userDept', auth.authTokenAdmin, (req, res) => {
-    Admin.user_dept(res)
+    SecM.user_dept(res)
+})
+router.get('/userJob', auth.authTokenAdmin, (req, res) => {
+    SecM.user_job(res)
 })
 
+router.get('/userPay', auth.authTokenAdmin, (req, res) => {
+    SecM.user_pay(res)
+})
+
+router.get('/search', auth.authTokenAdmin, (req, res) => {
+    res.render('admin/search', { title: "Search Employee" })
+})
+
+router.post('/search', auth.authTokenAdmin, (req, res) => {
+    Admin.searchId(req, res)
+})
 module.exports = router

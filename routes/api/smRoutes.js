@@ -49,4 +49,29 @@ router.post('/removeSup', auth.authTokenSM, (req, res) => {
     SecM.removeSup(req, res)
 })
 
+router.get('/reports', auth.authTokenSM, (req, res) => {
+    res.render('sm/reports', { titile: "Reports" })
+})
+
+router.get('/userDept', auth.authTokenSM, (req, res) => {
+    SecM.user_dept(res)
+})
+router.get('/userJob', auth.authTokenSM, (req, res) => {
+    SecM.user_job(res)
+})
+
+router.get('/userPay', auth.authTokenSM, (req, res) => {
+    SecM.user_pay(res)
+})
+
+router.get('/search', auth.authTokenSM, (req, res) => {
+    res.render('sm/search', {
+        title: "Search"
+    })
+})
+
+router.post('/search', auth.authTokenSM, (req, res) => {
+    SecM.searchId(req, res)
+})
+
 module.exports = router
