@@ -79,6 +79,18 @@ exports.saveEmDet = async function(req, res) {
         console.log(error)
     }
 }
+<<<<<<< HEAD
+exports.reqLeave = async function(req, res) {
+    type = req.body.leavetype
+    detail = req.body.detail
+    date=req.body.leavedate
+    id = req.user.user_id
+
+    query = "INSERT INTO requested VALUES (?,?,?,?)"
+
+    try {
+        await db.query(query, [id, type, detail,date])
+=======
 
 
 
@@ -93,6 +105,7 @@ exports.saveDepInfo = async function(req, res) {
 
     try {
         await db.query(query, [id, fullname, birthday, relationship, contactnum])
+>>>>>>> c72bd8d3df848534e5e517a32ec9166bb1d51218
         res.redirect('/')
     } catch (error) {
         console.log(error)
