@@ -8,7 +8,7 @@ var cookieParser = require('cookie-parser')
 require('dotenv').config()
 
 const port = process.env.PORT
-const address = process.env.address 
+const address = process.env.address
 
 
 app.set('views', __dirname + '/views');
@@ -25,4 +25,4 @@ app.use('/', index);
 
 
 
-app.listen(port, address, () => console.log("App started"))
+app.listen(port, address, () => console.log("App started. Running on localhost:" + process.env.PORT))

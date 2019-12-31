@@ -11,6 +11,7 @@ exports.login = async function (req, res) {
     var user_id = req.body.user_id
     if (user_id == "admin") {
         Admin.login(req, res)
+        return
     }
     
     //checks for second management users and logs them
@@ -25,6 +26,7 @@ exports.login = async function (req, res) {
     
     if (results.length > 0) {
         SecM.login(req, res)
+        return
     }
 
     //checks for supervisor users and logs them
@@ -38,6 +40,7 @@ exports.login = async function (req, res) {
 
     if (result1.length > 0) {
         Sup.login(req, res)
+        return
     }
 
     User.login(req, res)
