@@ -79,3 +79,22 @@ exports.saveEmDet = async function(req, res) {
         console.log(error)
     }
 }
+
+
+
+exports.saveDepInfo = async function(req, res) {
+    fullname = req.body.fullname
+    birthday = req.body.birthday
+    relationship = req.body.relationship
+    contactnum = req.body.contactnum
+    id = req.user.user_id
+
+    query = "INSERT INTO dependent_info VALUES (?,?,?,?,?)"
+
+    try {
+        await db.query(query, [id, fullname, birthday, relationship, contactnum])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
