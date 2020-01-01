@@ -160,7 +160,7 @@ exports.addDet = async function(req, res) {
     query = "SELECT * FROM additional_details"
     try {
         results = await db.query(query)
-        res.render('user/additional.ejs', { title: "Add Additional Information", results: results })
+        res.render('employee/additional.ejs', { title: "Add Additional Information", results: results })
     } catch (error) {
 
     }

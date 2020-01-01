@@ -6,14 +6,14 @@
             <h2> Add Additional Information</h2>
 
             <% if (results.length > 0) {%>
-            <form action="/api/sm/additionaldet" method="post">
+            <form action="/api/user/additionaldet" method="post">
                     
                 <% results.forEach(function(result, index){ %>
                 <p><%=result.custom_attr%></p>
                 <input name="<%=result.id%>" ></input>
                 <% }) %>
             
-            <button type=submit class="btn btn-primary button btn-block" >Submit</button>
+            <button type='submit' class="btn btn-primary button btn-block" >Submit</button>
             </form>
                 <% } else { %>
                     <p class="text-center">No custom attr found.</p>
