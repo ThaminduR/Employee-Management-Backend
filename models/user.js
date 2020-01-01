@@ -182,17 +182,20 @@ exports.adddetdb = async function(req, res) {
 
 exports.checkLeave = async function(req,res) {
     const id=req.user.user_id
-    query = "SELECT count_leaves(?,? ) AS count_leaves" 
+    query = "SELECT count_leaves(?,?) AS count_leaves" 
+    console.log("HHHH")
 
     try {
+        console.log("TTTTTTTTTT")
         result1 = await db.query(query,[id,"Annual"])
         result2 = await db.query(query,[id,"Casual"])
         result3 = await db.query(query,[id,"Maternity"])
         result4 = await db.query(query,[id,"No Pay"])
-        var results=[result1,result2,result3,result4]
+         result =[result1,result2,result3,result4]
+        console.log(result )
         res.render('employee/checkleave.ejs', {
             title: "Remaining Leaves",
-            result=results
+            result:result
 
         })
     } catch (error) {
