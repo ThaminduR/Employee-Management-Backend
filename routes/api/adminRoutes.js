@@ -70,4 +70,8 @@ router.post('/search', auth.authTokenAdmin, (req, res) => {
 router.get('/organization', auth.authTokenAdmin, (req, res) => {
     Admin.getOrg(res)
 })
+
+router.get('/userLeaves', auth.authTokenAdmin, (req, res) => {
+    SecM.user_leave(res)
+})
 module.exports = router
