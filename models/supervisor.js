@@ -35,15 +35,20 @@ exports.addEtoS = async function(req, res) {
 
 exports.accept = async function(req, res) {
 
+
     leave_id = req.body.leave_id
+    id=req.user.user_id
     console.log(leave_id)
 
     query1 = " UPDATE leaves SET status='ACCEPTED' WHERE leave_id=?"
     query2="DELETE FROM requested WHERE l_id=?;"
+    query3="INSERT INTO taken VALUES(?,?)"
 
     try {
         await db.query(query1, [leave_id])
         await db.query(query2, [leave_id])
+        await db.query(query3, [id,leave_id])
+
         res.redirect('/')
     } catch (error) {
         console.log(error)
