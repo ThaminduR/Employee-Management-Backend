@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 db = new database()
 
-exports.getEmp = async function(res) {
+exports.getEmp = async function (res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT sup_id FROM supervisors) AND id NOT IN (SELECT e_id FROM supervises) ORDER BY id ASC"
 
     try {
@@ -19,7 +19,7 @@ exports.getEmp = async function(res) {
     }
 }
 
-exports.addEtoS = async function(req, res) {
+exports.addEtoS = async function (req, res) {
     user_id = req.user.user_id
     id = req.body.id
 
@@ -33,21 +33,21 @@ exports.addEtoS = async function(req, res) {
     }
 }
 
-exports.accept = async function(req, res) {
+exports.accept = async function (req, res) {
 
 
     leave_id = req.body.leave_id
-    id=req.user.user_id
+    id = req.user.user_id
     console.log(leave_id)
 
     query1 = " UPDATE leaves SET status='ACCEPTED' WHERE leave_id=?"
-    query2="DELETE FROM requested WHERE l_id=?;"
-    query3="INSERT INTO taken VALUES(?,?)"
+    query2 = "DELETE FROM requested WHERE l_id=?;"
+    query3 = "INSERT INTO taken VALUES(?,?)"
 
     try {
         await db.query(query1, [leave_id])
         await db.query(query2, [leave_id])
-        await db.query(query3, [id,leave_id])
+        await db.query(query3, [id, leave_id])
 
         res.redirect('/')
     } catch (error) {
@@ -55,7 +55,7 @@ exports.accept = async function(req, res) {
     }
 }
 
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -96,7 +96,7 @@ exports.login = async function(req, res) {
     }
 }
 
-exports.getReqLeaves = async function(req, res) {
+exports.getReqLeaves = async function (req, res) {
 
     user_id = req.user.user_id;
 
@@ -117,7 +117,7 @@ exports.getReqLeaves = async function(req, res) {
 }
 
 //get info of the supervisor
-exports.getEmpdat = async function(req, res) {
+exports.getEmpdat = async function (req, res) {
     query = "SELECT * FROM employee_details WHERE id=?"
     id = req.user.user_id
     try {
@@ -132,7 +132,7 @@ exports.getEmpdat = async function(req, res) {
 }
 
 //to save dependant info
-exports.saveDepInfo = async function(req, res) {
+exports.saveDepInfo = async function (req, res) {
     fullname = req.body.fullname
     birthday = req.body.birthday
     relationship = req.body.relationship
@@ -150,7 +150,7 @@ exports.saveDepInfo = async function(req, res) {
 }
 
 //to save emergency details
-exports.saveEmDet = async function(req, res) {
+exports.saveEmDet = async function (req, res) {
     fullname = req.body.fullname
     contactnum = req.body.contactnum
     id = req.user.user_id
@@ -167,12 +167,12 @@ exports.saveEmDet = async function(req, res) {
 
 
 exports.decline = async function (req, res) {
-    
+
     leave_id = req.body.leave_id
     console.log(leave_id)
 
     query1 = " UPDATE leaves SET status='DECLINED' WHERE leave_id=?"
-    query2="DELETE FROM requested WHERE l_id=?;"
+    query2 = "DELETE FROM requested WHERE l_id=?;"
 
     try {
         await db.query(query1, [leave_id])
@@ -183,11 +183,38 @@ exports.decline = async function (req, res) {
     }
 }
 
-exports.addDet = async function(req, res) {
+exports.addDet = async function (req, res) {
     query = "SELECT * FROM additional_details"
     try {
         results = await db.query(query)
         res.render('sup/additional.ejs', { title: "Add Additional Information", results: results })
+    } catch (error) {
+
+    }
+}
+
+exports.emp_un = async function (req, res) {
+    const id = req.user.user_id
+    query = "SELECT * FROM supervises JOIN employee_details ON e_id=id WHERE s_id = ?"
+    try {
+        result = await db.query(query, [id])
+        res.render('sup/emp_un', {
+            title: "Employees Under Me",
+            users: result
+        })
+    } catch (error) {
+
+    }
+}
+
+exports.removeEmUn = async function (req, res) {
+    const id = req.body.id
+    const s_id = req.user.user_id
+
+    const query = "DELETE FROM supervises WHERE s_id = ? AND e_id =?"
+    try {
+        await db.query(query, [s_id, id])
+        res.redirect('/')
     } catch (error) {
 
     }

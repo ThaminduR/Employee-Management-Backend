@@ -25,9 +25,9 @@ router.get('/addcontact', auth.authTokenSup, (req, res) => {
     res.render('sup/emform.ejs', { title: "Add Emergency Detail" })
 })
 router.post('/saveEmDet', auth.authTokenSup, (req, res) => {
-        Sup.saveEmDet(req, res)
-    })
-    //route to check info
+    Sup.saveEmDet(req, res)
+})
+//route to check info
 router.get('/checkinfo', auth.authTokenSup, (req, res) => {
     Sup.getEmpdat(req, res)
 })
@@ -57,5 +57,11 @@ router.get('/additionaldet', auth.authTokenSup, (req, res) => {
     Sup.addDet(req, res)
 })
 
-router.get('/emp_un')
+router.get('/emp_un', auth.authTokenSup, (req, res) => {
+    Sup.emp_un(req, res)
+})
+
+router.post('/removeEmUn', auth.authTokenSup, (req, res) => {
+    Sup.removeEmUn(req, res)
+})
 module.exports = router
