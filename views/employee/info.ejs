@@ -1,7 +1,7 @@
 <%- include('../partial/header') -%>
 <div class="container">
     <div class="table-wrapper main">
-        <% if (users.length > 0) {%>
+        <% if (user.length > 0) {%>
             <table class="table table-hovered">
                 <thead class="thead-dark">
                     <tr>
@@ -23,22 +23,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                <% users.forEach(function(user, index){ %>
+                
                     <tr>
-                        <th scope="row"><%= user.id %></th>
-                        <td><%= user.firstname %></td>
-                        <td><%= user.lastname %></td>
-                        <td><%= user.marital_status %></td>
-                        <td><%= user.birthday %></td>
-                        <td><%= user.address %></td>
-                        <td><%= user.contact_num %></td>
-                        <td><%= user.name %></td>
-                        <td><%= user.title %></td>
-                        <td><%= user.type %></td>
-                        <td><%= user.paygrade_name %></td>
+                        <th scope="row"><%= user[0].id %></th>
+                        <td><%= user[0].firstname %></td>
+                        <td><%= user[0].lastname %></td>
+                        <td><%= user[0].marital_status %></td>
+                        <td><%= user[0].birthday %></td>
+                        <td><%= user[0].address %></td>
+                        <td><%= user[0].contact_num %></td>
+                        <td><%= user[0].name %></td>
+                        <td><%= user[0].title %></td>
+                        <td><%= user[0].type %></td>
+                        <td><%= user[0].paygrade_name %></td>
                         
                     </tr>
-                    <% }) %>
+             
                 </tbody>
             </table>
             <% } else { %>

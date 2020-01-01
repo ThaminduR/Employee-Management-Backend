@@ -67,6 +67,16 @@ router.get('/addcontact', auth.authTokenSM, (req, res) => {
     res.render('sm/emform.ejs', { title: "Add Emergency Detail" })
 })
 
+//route to add dependant info
+router.get('/adddependant', auth.authTokenSM, (req, res) => {
+    res.render('sm/depform.ejs', { title: "Add Dependant Information" })
+})
+
+router.post('/saveDepInfo', auth.authTokenSM, (req, res) => {
+    User.saveDepInfo(req, res)
+})
+
+
 router.get('/search', auth.authTokenSM, (req, res) => {
     res.render('sm/search', {
         title: "Search"
