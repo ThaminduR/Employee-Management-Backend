@@ -79,8 +79,8 @@ exports.getReqLeaves = async function (req, res) {
     try {
         result = await db.query(query, [user_id]);
         res.render('sup/requests.ejs', {
-            title: "Users",
-            users: result
+            title: "Requests",
+            requests: result
         })
     } catch (error) {
         console.log(error)

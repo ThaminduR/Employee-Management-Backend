@@ -13,7 +13,7 @@ router.post('/addEtoS', auth.authTokenSup, (req, res) => {
 })
 
 router.get('/requested', auth.authTokenUser, (req, res) => {
-    Sup.getReqLeaves(res)
+    Sup.getReqLeaves(req,res)
 })
 
 module.exports = router
