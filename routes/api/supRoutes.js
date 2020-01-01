@@ -12,8 +12,8 @@ router.post('/addEtoS', auth.authTokenSup, (req, res) => {
     Sup.addEtoS(req, res)
 })
 
-router.get('/viewLeaves', auth.authTokenUser, (req, res) => {
-    res.render('sup/requests.ejs', { title: "Requested Leaves" })
+router.get('/requested', auth.authTokenUser, (req, res) => {
+    Sup.getReqLeaves(res)
 })
 
 module.exports = router
