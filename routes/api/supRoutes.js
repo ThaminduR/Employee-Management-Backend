@@ -12,7 +12,7 @@ router.post('/addEtoS', auth.authTokenSup, (req, res) => {
     Sup.addEtoS(req, res)
 })
 
-router.get('/requested', auth.authTokenUser, (req, res) => {
+router.get('/requested', auth.authTokenSup, (req, res) => {
     Sup.getReqLeaves(req, res)
 })
 

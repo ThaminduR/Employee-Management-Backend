@@ -1,6 +1,7 @@
 const database = require('../config/db')
-
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+
 
 db = new database()
 
@@ -47,8 +48,8 @@ exports.login = async function (req, res) {
         return
     }
     if (results.length > 0) {
-
-        if (results[0].h_password == password) {
+        hash = await bcrypt.compare(password, results[0].h_password)
+        if (hash) {
 
             user = {
                 user_id: user_id,
@@ -74,11 +75,14 @@ exports.login = async function (req, res) {
 }
 
 exports.getReqLeaves = async function(req, res) {
-    user_id = req.body.user_id;
+    console.log("Test")
+    user_id = req.user.user_id;
+
     query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM employee_requestedleaves WHERE s_id=?'
     console.log("Test")
     try {
         result = await db.query(query, [user_id]);
+        console.log(result)
         res.render('sup/requests.ejs', {
             title: "Requests",
             requests: result
