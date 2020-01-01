@@ -40,4 +40,8 @@ router.get('/adddependant', auth.authTokenUser, (req, res) => {
 router.post('/saveDepInfo', auth.authTokenUser, (req, res) => {
     User.saveDepInfo(req, res)
 })
+
+router.get('/checkleave', auth.authTokenUser, (req, res) => {
+    res.render('employee/checkleave.ejs', { title: "Check Leave Status" })
+})
 module.exports = router;
