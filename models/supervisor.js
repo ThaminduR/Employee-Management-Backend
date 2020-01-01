@@ -38,10 +38,12 @@ exports.accept = async function (req, res) {
     leave_id = req.body.leave_id
     console.log(leave_id)
 
-    query = " UPDATE requested SET status='ACCEPTED' WHERE l_id=?"
+    query1 = " UPDATE leaves SET status='ACCEPTED' WHERE leave_id=?"
+    query2="DELETE FROM requested WHERE l_id=?;"
 
     try {
-        await db.query(query, [leave_id])
+        await db.query(query1, [leave_id])
+        await db.query(query2, [leave_id])
         res.redirect('/')
     } catch (error) {
         console.log(error)
@@ -152,6 +154,24 @@ exports.saveEmDet = async function(req, res) {
 
     try {
         await db.query(query, [id, fullname, contactnum])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+exports.decline = async function (req, res) {
+    
+    leave_id = req.body.leave_id
+    console.log(leave_id)
+
+    query1 = " UPDATE leaves SET status='DECLINED' WHERE leave_id=?"
+    query2="DELETE FROM requested WHERE l_id=?;"
+
+    try {
+        await db.query(query1, [leave_id])
+        await db.query(query2, [leave_id])
         res.redirect('/')
     } catch (error) {
         console.log(error)

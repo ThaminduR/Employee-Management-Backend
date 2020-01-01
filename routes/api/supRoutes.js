@@ -45,4 +45,8 @@ router.get('/viewLeaves', auth.authTokenUser, (req, res) => {
     res.render('sup/requests.ejs', { title: "Requested Leaves" })
 })
 
+router.post('/decline', auth.authTokenSup, (req, res) => {
+    Sup.decline(req, res)
+})
+
 module.exports = router
