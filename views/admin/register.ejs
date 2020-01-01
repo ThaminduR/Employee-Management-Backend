@@ -128,7 +128,7 @@
                             <input type="password" class="col-md-3 form-control" id="con-password" name='con-password' required autocomplete="off" />
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-primary btn-block col-md-3">Register User</button>
+                        <button type="submit" id="submit-button" class="btn btn-primary btn-block col-md-3">Register User</button>
                     </form>
                 </div>
             </div>
@@ -166,18 +166,19 @@ let passwordCommenter = function (){
 let passwordConfirmChecker = function (){
 
     let condivi = document.querySelector("#con-password");
-    condivi.addEventListener("change",function(text){
+    condivi.addEventListener("input",function(text){
         let conpassword = text.target.value;
         if(conpassword != password){
             document.querySelector("#con-password-comment").innerHTML="";
             const comment = document.createElement('p');
             comment.textContent="Passwords do not match";
             document.querySelector("#con-password-comment").appendChild(comment);
+            document.getElementById("submit-button").disabled = true;
             
         }
         else{
             document.querySelector("#con-password-comment").innerHTML="";
-
+            document.getElementById("submit-button").disabled = false;
         }
         
     })
