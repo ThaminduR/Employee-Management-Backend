@@ -170,9 +170,26 @@ exports.adddetdb = async function(req, res) {
     const id = req.user.user_id
     for (var key in req.body) {
         const value = req.body[key]
-        query = "INSERT INTO add_det_emp VALUES(?,?,?)"
-        await db.query(query, [key, id, value])
+        const query1 = "SELECT * FROM add_det_emp WHERE add_id = ? AND e_id = ?"
+        try {
+            const results = await db.query(query1, [key, id])
+            if (results.length > 0) {
+                const query = "UPDATE add_det_emp SET value = ? WHERE add_id =? AND e_id =?"
+                await db.query(query, [value, key, id])
+                res.redirect('/')
+            } else {
+                const query = "INSERT INTO add_det_emp VALUES(?,?,?)"
+                try {
+                    await db.query(query, [key, id, value])
+                    res.redirect('/')
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
 
     }
-
 }
