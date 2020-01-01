@@ -504,3 +504,6 @@ exports.addDet = async function(req, res) {
 
     }
 }
+
+
+//SELECT e_id as Employee_Id, custom_attr as Custom_Attribute, value as Value FROM add_det_emp JOIN additional_details ON id=add_id
