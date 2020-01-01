@@ -123,20 +123,6 @@ exports.reqLeave = async function(req, res) {
 }
 
 
-//Check leave status
-exports.checkLeave = async function(res) {
-    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
-
-    try {
-        result = await db.query(query)
-        res.render('employee/info.ejs', {
-            title: "Employee Details",
-            users: result
-        })
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 
 exports.saveDepInfo = async function(req, res) {
@@ -193,3 +179,24 @@ exports.adddetdb = async function(req, res) {
 
     }
 }
+
+exports.checkLeave = async function(req,res) {
+    const id=req.user.user_id
+    query = "SELECT count_leaves(?,? ) AS count_leaves" 
+
+    try {
+        result1 = await db.query(query,[id,"Annual"])
+        result2 = await db.query(query,[id,"Casual"])
+        result3 = await db.query(query,[id,"Maternity"])
+        result4 = await db.query(query,[id,"No Pay"])
+        var results=[result1,result2,result3,result4]
+        res.render('employee/checkleave.ejs', {
+            title: "Remaining Leaves",
+            result=results
+
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
