@@ -20,8 +20,10 @@ router.get('/requestleave', auth.authTokenUser, (req, res) => {
     res.render('employee/leave.ejs', { title: "Request Leave" })
 })
 
+
+
 router.get('/checkleave', auth.authTokenUser, (req, res) => {
-    res.render('employee/checkleave.ejs', { title: "Check Leave Status" })
+    User.checkLeave(req, res)
 })
 
 router.post('/reqleave', auth.authTokenUser, (req, res) => {
