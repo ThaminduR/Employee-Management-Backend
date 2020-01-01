@@ -115,3 +115,19 @@ exports.saveDepInfo = async function(req, res) {
         console.log(error)
     }
 }
+
+//to save emergency details
+exports.saveEmDet = async function(req, res) {
+    fullname = req.body.fullname
+    contactnum = req.body.contactnum
+    id = req.user.user_id
+
+    query = "INSERT INTO emergency_details VALUES (?,?,?)"
+
+    try {
+        await db.query(query, [id, fullname, contactnum])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -16,8 +16,10 @@ router.post('/addEtoS', auth.authTokenSup, (req, res) => {
 router.get('/addcontact', auth.authTokenSup, (req, res) => {
     res.render('sup/emform.ejs', { title: "Add Emergency Detail" })
 })
-
-//route to check info
+router.post('/saveEmDet', auth.authTokenSup, (req, res) => {
+        Sup.saveEmDet(req, res)
+    })
+    //route to check info
 router.get('/checkinfo', auth.authTokenSup, (req, res) => {
     Sup.getEmpdat(req, res)
 })
