@@ -48,8 +48,9 @@ router.get('/additionaldet', auth.authTokenUser, (req, res) => {
 })
 
 router.post('/additionaldet', auth.authTokenUser, (req, res) => {
-            User.adddetdb(req, res)
-            router.get('/checkleave', auth.authTokenUser, (req, res) => {
-                res.render('employee/checkleave.ejs', { title: "Check Leave Status" })
-            })
-            module.exports = router;
+    User.adddetdb(req, res)
+})
+router.get('/checkleave', auth.authTokenUser, (req, res) => {
+    res.render('employee/checkleave.ejs', { title: "Check Leave Status" })
+})
+module.exports = router;
