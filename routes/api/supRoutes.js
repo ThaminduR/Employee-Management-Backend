@@ -12,12 +12,18 @@ router.post('/addEtoS', auth.authTokenSup, (req, res) => {
     Sup.addEtoS(req, res)
 })
 
+router.get('/requested', auth.authTokenUser, (req, res) => {
+    Sup.getReqLeaves(req, res)
+})
+
 //to add emergency contacts
 router.get('/addcontact', auth.authTokenSup, (req, res) => {
     res.render('sup/emform.ejs', { title: "Add Emergency Detail" })
 })
-
-//route to check info
+router.post('/saveEmDet', auth.authTokenSup, (req, res) => {
+        Sup.saveEmDet(req, res)
+    })
+    //route to check info
 router.get('/checkinfo', auth.authTokenSup, (req, res) => {
     Sup.getEmpdat(req, res)
 })
@@ -30,49 +36,9 @@ router.get('/adddependant', auth.authTokenSup, (req, res) => {
 router.post('/saveDepInfo', auth.authTokenSup, (req, res) => {
     Sup.saveDepInfo(req, res)
 })
+
 router.get('/viewLeaves', auth.authTokenUser, (req, res) => {
     res.render('sup/requests.ejs', { title: "Requested Leaves" })
 })
 
 module.exports = router
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-router.get('/allNEmp', auth.authTokenSM, (req, res) => {
-    Sup.getNEmp(res)
-})
