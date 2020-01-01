@@ -30,7 +30,7 @@
                         <td><%= request.leavetype %></td>
                         <td><%= request.date %></td>
                         <td><%= request.description %></td>
-                        
+                        <td><button class="btn btn-outline-warning" id="addbutton" onClick=accept("<%= request.leave_id %>")>Accept</button></td>
                     </tr>
                     <% }) %>
                 </tbody>
@@ -40,20 +40,21 @@
             <% } %>
     </div>
 </div>
-// <script>
-//         function addE(id){
-//             $.ajax({
-//                 type: 'POST',
-//                 url: 'addEtoS',
-//                 data: {
-//                     "id": id
-//                 },
-//                 success: function (result) {
-//                     //location.reload();
-//                 }
-//             });
-//         }
-// </script>
+<script>
+        function accept(leave_id){
+            
+            $.ajax({
+                type: 'POST',
+                url: 'accept',
+                data: {
+                    "leave_id": leave_id
+                },
+                success: function (result) {
+                    //location.reload();
+                }
+            });
+        }
+</script>
 </body>
 
 </html>

@@ -33,6 +33,21 @@ exports.addEtoS = async function (req, res) {
     }
 }
 
+exports.accept = async function (req, res) {
+    
+    leave_id = req.body.leave_id
+    console.log(leave_id)
+
+    query = " UPDATE requested SET status='ACCEPTED' WHERE leave_id=?"
+
+    try {
+        await db.query(query, [leave_id])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
@@ -75,14 +90,14 @@ exports.login = async function (req, res) {
 }
 
 exports.getReqLeaves = async function(req, res) {
-    console.log("Test")
+    
     user_id = req.user.user_id;
 
     query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM employee_requestedleaves WHERE s_id=?'
-    console.log("Test")
+    
     try {
         result = await db.query(query, [user_id]);
-        console.log(result)
+        
         res.render('sup/requests.ejs', {
             title: "Requests",
             requests: result
