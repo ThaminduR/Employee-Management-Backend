@@ -30,6 +30,10 @@ router.get('/adddependant', auth.authTokenSup, (req, res) => {
 router.post('/saveDepInfo', auth.authTokenSup, (req, res) => {
     Sup.saveDepInfo(req, res)
 })
+router.get('/viewLeaves', auth.authTokenUser, (req, res) => {
+    res.render('sup/requests.ejs', { title: "Requested Leaves" })
+})
+
 module.exports = router
 
 
