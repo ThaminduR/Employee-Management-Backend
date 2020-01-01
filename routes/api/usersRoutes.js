@@ -40,4 +40,14 @@ router.get('/adddependant', auth.authTokenUser, (req, res) => {
 router.post('/saveDepInfo', auth.authTokenUser, (req, res) => {
     User.saveDepInfo(req, res)
 })
+
+//to enter additional data
+
+router.get('/additionaldet', auth.authTokenUser, (req, res) => {
+    User.addDet(req, res)
+})
+
+router.post('/additionaldet', auth.authTokenUser, (req, res) => {
+    User.adddetdb(req, res)
+})
 module.exports = router;
