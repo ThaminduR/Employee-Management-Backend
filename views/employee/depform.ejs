@@ -1,40 +1,52 @@
- <%- include('../partial/header') -%>
-     <%- include('sidebar') -%>
+<%- include('../partial/header') -%>
+<%- include('sidebar') -%>
 
-        <div class="main">
-        <b><h1 style="font-size:xx-large;"></h1></b>
-            <h2> Add Dependant Information</h2>
-            <form action="/api/user/saveDepInfo" method="post">
-                        <div class="form-group">
-                            <div class="field-wrap">
-                                <label for="id-input" class="sr-only">Full Name</label>
-                                <input type="text" name='fullname' class="form-control" placeholder="Name" id="name-input" required autocomplete="off" required autofocus />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="field-wrap">
-                                <label for="id-input" class="sr-only">Birthday</label>
-                                <input type="text" name='birthday' class="form-control" placeholder="birthday" id="birthday-input" required autocomplete="off" required autofocus />
-                            </div>
-                        </div>
+   <div class="main container-fluid">
+       <div class="row">
+           <div class="col-md-12">
+               <div class="alert text-lg-left">
+               Add Dependant Information
+               </div>
+               <hr>
+               
+               <form action="/api/user/saveDepInfo" method="post"> 
+                   <div class="form-group col-md-4">
+                       <div class="field-wrap">
+                           <label for="id-input" class="sr-only">Full Name</label>
+                           <input type="text" name='fullname' class="form-control" placeholder="Name" id="name-input" required autocomplete="off" required autofocus />
+                       </div>
+                   </div>
+                   <div class="form-group col-md-4">
+                       <div class="field-wrap">
+                           <label for="id-input" class="sr-only">Birthday</label>
+                           <input type="text" name='birthday' class="form-control" placeholder="Birthday" id="birthday-input" required autocomplete="off" required autofocus />
+                       </div>
+                   </div>
 
-                        <div class="form-group">
-                            <div class="field-wrap">
-                                <label for="id-input" class="sr-only">Relationship</label>
-                                <input type="text" name='relationship' class="form-control" placeholder="Relationship" id="relationship-input" required autocomplete="off" required autofocus />
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="field-wrap">
-                                <label for="pass-input" class="sr-only"> Contact Number
-                                </label>
-                                <input type="text" name='contactnum' class="form-control" placeholder="Contact Number" id="num-input" required autocomplete="off" required />
-                            </div>
-                        </div>
-                        <button type=submit class="btn btn-primary button btn-block" >Submit</button>
-            </form>
-        </div>
+                   <div class="form-group col-md-4">
+                       <div class="field-wrap">
+                           <label for="id-input" class="sr-only">Relationship</label>
+                           <input type="text" name='relationship' class="form-control" placeholder="Relationship" id="relationship-input" required autocomplete="off" required autofocus />
+                       </div>
+                   </div>
+                   
+                   <div class="form-group col-md-4">
+                       <div class="field-wrap">
+                           <label for="pass-input" class="sr-only"> Contact Number
+                           </label>
+                           <input type="text" name='contactnum' class="form-control" placeholder="Contact Number" id="num-input" required autocomplete="off" required />
+                       </div>
+                   </div>
+                   <div class="form-group col-md-4">
+                       <button type=submit class="btn btn-primary">Submit</button>
+                   </div>
+                   
+       </form>
 
-        </body>
-        </html>
+           </div>
+       </div>
+       
+   </div>
+
+   </body>
+   </html>
