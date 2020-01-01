@@ -1,5 +1,6 @@
 const database = require('../config/db')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
 
 db = new database()
 
@@ -19,8 +20,8 @@ exports.login = async function(req, res) {
         return
     }
     if (results.length > 0) {
-
-        if (results[0].h_password == password) {
+        hash = await bcrypt.compare(password, results[0].h_password)
+        if (hash) {
 
             user = {
                 user_id: user_id,
