@@ -66,4 +66,8 @@ router.get('/search', auth.authTokenAdmin, (req, res) => {
 router.post('/search', auth.authTokenAdmin, (req, res) => {
     Admin.searchId(req, res)
 })
+
+router.get('/organization', auth.authTokenAdmin, (req, res) => {
+    Admin.getOrg(res)
+})
 module.exports = router

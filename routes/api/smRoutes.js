@@ -63,6 +63,9 @@ router.get('/userJob', auth.authTokenSM, (req, res) => {
 router.get('/userPay', auth.authTokenSM, (req, res) => {
     SecM.user_pay(res)
 })
+router.get('/addcontact', auth.authTokenSM, (req, res) => {
+    res.render('employee/emform.ejs', { title: "Add Emergency Detail" })
+})
 
 router.get('/search', auth.authTokenSM, (req, res) => {
     res.render('sm/search', {

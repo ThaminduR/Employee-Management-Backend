@@ -46,7 +46,12 @@
                             <label for="contact_num">
                                 Contact Num 
                             </label>
-                            <input type="text"  class="col-md-3 form-control" id="contact_num" name="contact_num" required autocomplete="off" />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">+94</span>
+                                </div>
+                                <input type="text"  class="col-md-3 form-control" id="contact_num" name="contact_num" placeholder="7XXXXXXXX" required autocomplete="off" />
+                            </div>
                         </div>
                         
                         <!-- Selects Start Here -->
@@ -70,7 +75,7 @@
                                     <select class="custom-select d-block w-100" name="job_title" required>
                                         <option value="" selected disabled hidden>Choose here</option>
                                         <option value="Manager">Manager</option>
-                                        <option value="Employee">Employee</option>
+                                        
                                     </select>
                                 </div>
                                 <p></p>
@@ -91,11 +96,6 @@
                                     <select class="custom-select d-block w-100" name="emp_status" required>
                                         <option value="" selected disabled hidden>Choose here</option>
                                         <option value="Permanent">Permanent</option>
-                                        <option value="Contract full-time">Contract full time</option>
-                                        <option value="Contract part-time">Contract part time</option>
-                                        <option value="Intern full-time">Intern full time</option>
-                                        <option value="Intern part-time">Intern part time</option>
-                                        <option value="Frelance">Freelance</option>
                                     </select>
 
                                 </div>
