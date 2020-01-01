@@ -1,11 +1,22 @@
 <%- include('../partial/header') -%>
 <%- include('sidebar') -%>
 
-
-<div class="main">
-  <a href="/api/sm/userDept" class="btn">Users by department</a>
-  <a href="/api/sm/userJob" class="btn">Users by Job Title</a>
-  <a href="/api/sm/userPay" class="btn">Users by Paygrade</a>   
+<br>
+<div class="main container-fluid">
+  <div class="row">
+    <div class="col-md-1">
+      
+    </div>
+    <div class="col-md-3">
+      <a href="/api/sm/userDept" class="btn btn-outline-primary btn-block">Users by Department</a>
+    </div>
+    <div class="col-md-3">
+      <a href="/api/sm/userJob" class="btn btn-outline-secondary btn-block">Users by Job Title</a>
+    </div>
+    <div class="col-md-3">
+      <a href="/api/sm/userPay" class="btn btn-outline-info btn-block">Users by Paygrade</a>
+    </div>
+  </div>
 </div>
 
     </body>

@@ -1,9 +1,12 @@
  <%- include('../partial/header') -%>
      <%- include('sidebar') -%>
 
-        <div class="main">
-        <b><h1 style="font-size:xx-large;"></h1></b>
-            <h2> Add Custom Attributes</h2>
+        <div class="main container">
+            <br>
+            <div class="text-lg-left">
+                <p>Add Custom Fields</p>
+            </div>
+            <hr>
             <form action="/api/admin/addcustom" method="post">
                         <div class="form-group">
                             <div class="field-wrap">
@@ -12,7 +15,7 @@
                                 <input type="text" name='attribute' class="form-control" placeholder="Custom Attribute" id="num-input" required autocomplete="off" required />
                             </div>
                         </div>
-                        <button type=submit class="btn btn-primary button btn-block" >Submit</button>
+                        <button type=submit class="btn btn-primary button" >Submit</button>
             </form>
         </div>
 
