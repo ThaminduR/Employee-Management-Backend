@@ -50,7 +50,7 @@ router.post('/removeSup', auth.authTokenSM, (req, res) => {
 })
 
 router.get('/reports', auth.authTokenSM, (req, res) => {
-    res.render('sm/reports', { titile: "Reports" })
+    res.render('sm/reports', { title: "Reports" })
 })
 
 router.get('/userDept', auth.authTokenSM, (req, res) => {
@@ -64,7 +64,7 @@ router.get('/userPay', auth.authTokenSM, (req, res) => {
     SecM.user_pay(res)
 })
 router.get('/addcontact', auth.authTokenSM, (req, res) => {
-    res.render('employee/emform.ejs', { title: "Add Emergency Detail" })
+    res.render('sm/emform.ejs', { title: "Add Emergency Detail" })
 })
 
 router.get('/search', auth.authTokenSM, (req, res) => {
