@@ -1,6 +1,7 @@
 const database = require('../config/db')
-
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+
 
 db = new database()
 
@@ -32,6 +33,21 @@ exports.addEtoS = async function(req, res) {
     }
 }
 
+exports.accept = async function(req, res) {
+
+    leave_id = req.body.leave_id
+    console.log(leave_id)
+
+    query = " UPDATE requested SET status='ACCEPTED' WHERE l_id=?"
+
+    try {
+        await db.query(query, [leave_id])
+        res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 exports.login = async function(req, res) {
     user_id = req.body.user_id
     password = req.body.password
@@ -47,8 +63,8 @@ exports.login = async function(req, res) {
         return
     }
     if (results.length > 0) {
-
-        if (results[0].h_password == password) {
+        hash = await bcrypt.compare(password, results[0].h_password)
+        if (hash) {
 
             user = {
                 user_id: user_id,
@@ -74,14 +90,20 @@ exports.login = async function(req, res) {
 }
 
 exports.getReqLeaves = async function(req, res) {
-    user_id = req.body.user_id;
-    query = 'SELECT * FROM taken WHERE e_id=(SELECT e_id FROM employee NATURAL JOIN supervices WHERE s_id=?) '
+
+    user_id = req.user.user_id;
+
+    query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM employee_requestedleaves WHERE s_id=?'
+
     try {
         result = await db.query(query, [user_id]);
+
         res.render('sup/requests.ejs', {
             title: "Requests",
             requests: result
+
         })
+
     } catch (error) {
         console.log(error)
     }
