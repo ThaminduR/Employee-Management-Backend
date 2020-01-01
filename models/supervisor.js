@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 db = new database()
 
-exports.getEmp = async function (res) {
+exports.getEmp = async function(res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT sup_id FROM supervisors) AND id NOT IN (SELECT e_id FROM supervises) ORDER BY id ASC"
 
     try {
@@ -18,7 +18,7 @@ exports.getEmp = async function (res) {
     }
 }
 
-exports.addEtoS = async function (req, res) {
+exports.addEtoS = async function(req, res) {
     user_id = req.user.user_id
     id = req.body.id
 
@@ -32,7 +32,7 @@ exports.addEtoS = async function (req, res) {
     }
 }
 
-exports.login = async function (req, res) {
+exports.login = async function(req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
