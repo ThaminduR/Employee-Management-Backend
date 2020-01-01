@@ -464,17 +464,31 @@ exports.saveEmDet = async function(req, res) {
 
 //to save dependant info
 exports.saveDepInfo = async function(req, res) {
-    fullname = req.body.fullname
-    birthday = req.body.birthday
-    relationship = req.body.relationship
-    contactnum = req.body.contactnum
+        fullname = req.body.fullname
+        birthday = req.body.birthday
+        relationship = req.body.relationship
+        contactnum = req.body.contactnum
+        id = req.user.user_id
+
+        query = "INSERT INTO dependent_info VALUES (?,?,?,?,?)"
+
+        try {
+            await db.query(query, [id, fullname, birthday, relationship, contactnum])
+            res.redirect('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    //to get second management user info
+exports.getEmpdat = async function(req, res) {
+    query = "SELECT * FROM employee_details WHERE id=?"
     id = req.user.user_id
-
-    query = "INSERT INTO dependent_info VALUES (?,?,?,?,?)"
-
     try {
-        await db.query(query, [id, fullname, birthday, relationship, contactnum])
-        res.redirect('/')
+        result = await db.query(query, [id])
+        res.render('sm/info.ejs', {
+            title: "Employee Details",
+            user: result
+        })
     } catch (error) {
         console.log(error)
     }

@@ -53,19 +53,21 @@ exports.logout = function(req, res) {
 //function to print employee data
 
 exports.getEmpdat = async function(req, res) {
-        query = "SELECT * FROM employee_details WHERE id=?"
-        id = req.user.user_id
-        try {
-            result = await db.query(query, [id])
-            res.render('employee/info.ejs', {
-                title: "Employee Details",
-                user: result
-            })
-        } catch (error) {
-            console.log(error)
-        }
+    query = "SELECT * FROM employee_details WHERE id=?"
+    id = req.user.user_id
+    try {
+        result = await db.query(query, [id])
+        res.render('employee/info.ejs', {
+            title: "Employee Details",
+            user: result
+        })
+    } catch (error) {
+        console.log(error)
     }
-    //to save emergency details
+}
+
+
+//to save emergency details
 exports.saveEmDet = async function(req, res) {
     fullname = req.body.fullname
     contactnum = req.body.contactnum

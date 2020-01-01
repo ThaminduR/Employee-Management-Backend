@@ -67,6 +67,11 @@ router.get('/addcontact', auth.authTokenSM, (req, res) => {
     res.render('sm/emform.ejs', { title: "Add Emergency Detail" })
 })
 
+//route to check info
+router.get('/checkinfo', auth.authTokenSM, (req, res) => {
+    SecM.getEmpdat(req, res)
+})
+
 //route to add dependant info
 router.get('/adddependant', auth.authTokenSM, (req, res) => {
     res.render('sm/depform.ejs', { title: "Add Dependant Information" })
