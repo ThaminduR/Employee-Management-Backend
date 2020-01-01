@@ -171,8 +171,11 @@ exports.adddetdb = async function(req, res) {
     for (var key in req.body) {
         const value = req.body[key]
         query = "INSERT INTO add_det_emp VALUES(?,?,?)"
-        await db.query(query, [key, id, value])
-
+        try {
+            await db.query(query, [key, id, value])
+            res.redirect('/')
+        } catch (error) {
+            console.log(error)
+        }
     }
-
 }
