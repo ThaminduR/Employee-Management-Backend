@@ -16,21 +16,21 @@
         <br>
         <br>
         <div class="table-wrapper main">
-            <% if (departments.length > 0) {%>
+            <% if (fields.length > 0) {%>
             <table class="table table-hovered" border="1">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Department</th>
-                        <th scope="col">Employees</th>
-                        <th scope="col">Number of Employees</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Custom Attribute</th>
+                        <th scope="col">Value</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% departments.forEach(function(department, index){ %>
+                    <% fields.forEach(function(field, index){ %>
                     <tr>
-                        <td><%= department.Department %></td>
-                        <td><%= department.Employees %></td>
-                        <td><%= department.Count %></td>
+                        <td><%= field.Employee_Id %></td>
+                        <td><%= field.Custom_Attribute %></td>
+                        <td><%= field.Value %></td>
                         </tr>
                     <% }) %>
                 </tbody>
