@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 db = new database()
 
-exports.getEmp = async function (res) {
+exports.getEmp = async function(res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT sup_id FROM supervisors) AND id NOT IN (SELECT e_id FROM supervises) ORDER BY id ASC"
 
     try {
@@ -19,7 +19,7 @@ exports.getEmp = async function (res) {
     }
 }
 
-exports.addEtoS = async function (req, res) {
+exports.addEtoS = async function(req, res) {
     user_id = req.user.user_id
     id = req.body.id
 
@@ -33,8 +33,8 @@ exports.addEtoS = async function (req, res) {
     }
 }
 
-exports.accept = async function (req, res) {
-    
+exports.accept = async function(req, res) {
+
     leave_id = req.body.leave_id
     console.log(leave_id)
 
@@ -50,7 +50,7 @@ exports.accept = async function (req, res) {
     }
 }
 
-exports.login = async function (req, res) {
+exports.login = async function(req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -92,20 +92,20 @@ exports.login = async function (req, res) {
 }
 
 exports.getReqLeaves = async function(req, res) {
-    
+
     user_id = req.user.user_id;
 
     query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM employee_requestedleaves WHERE s_id=?'
-    
+
     try {
         result = await db.query(query, [user_id]);
-        
+
         res.render('sup/requests.ejs', {
             title: "Requests",
             requests: result
-            
+
         })
-        
+
     } catch (error) {
         console.log(error)
     }

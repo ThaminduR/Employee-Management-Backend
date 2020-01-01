@@ -1,27 +1,46 @@
-<div class="table-wrapper main">
-    <% if (PayGs.length > 0) {%>
-    <table class="table table-hovered" border="1">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Pay Grade</th>
-                <th scope="col">Employees</th>
-                <th scope="col">Number of Employees</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% PayGs.forEach(function(pay, index){ %>
-            <tr>
-                <td><%= pay.Pay_Grade %></td>
-                <td><%= pay.Employees %></td>
-                <td><%= pay.Count %></td>
-                </tr>
-            <% }) %>
-        </tbody>
-    </table>
-    <% } else { %>
-    <p class="text-center">No records found.</p>
-    <% } %>
-</div>
-</body>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body style="margin: 2em 5em 5em 5em; background-color: beige;">
+        <div class="text-md-center">
+            <h1 class="h2">Employees by Pay Grade</h1>
+            <hr>
+        </div>
+        <a href="http://localhost:3000/" class="btn btn-outline-secondary"> Back </a>
+        <br>
+        <br>
+        <div class="table-wrapper main">
+            <% if (PayGs.length > 0) {%>
+            <table class="table table-hovered" border="1">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Pay Grade</th>
+                        <th scope="col">Employees</th>
+                        <th scope="col">Number of Employees</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% PayGs.forEach(function(pay, index){ %>
+                    <tr>
+                        <td><%= pay.Pay_Grade %></td>
+                        <td><%= pay.Employees %></td>
+                        <td><%= pay.Count %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+            <p class="text-center">No records found.</p>
+            <% } %>
+        </div>
+    <!-- JQuery and Popper -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+    <!-- BootStrap Script -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
 
 </html>

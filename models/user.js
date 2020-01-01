@@ -109,14 +109,14 @@ exports.reqLeave = async function(req, res) {
         console.log(error)
     }
 
-   
+
 
     query = "CALL request_leave(?,?,?,?,?)"
 
     try {
-        await db.query(query, [id,leave_id, type, detail, date])
+        await db.query(query, [id, leave_id, type, detail, date])
         res.redirect('/')
-           
+
     } catch (error) {
         console.log(error)
     }
@@ -124,7 +124,7 @@ exports.reqLeave = async function(req, res) {
 
 
 //Check leave status
-exports.checkLeave = async function (res) {
+exports.checkLeave = async function(res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
 
     try {
@@ -154,4 +154,25 @@ exports.saveDepInfo = async function(req, res) {
     } catch (error) {
         console.log(error)
     }
+}
+
+exports.addDet = async function(req, res) {
+    query = "SELECT * FROM additional_details"
+    try {
+        results = await db.query(query)
+        res.render('sm/additional.ejs', { title: "Add Additional Information", results: results })
+    } catch (error) {
+
+    }
+}
+
+exports.adddetdb = async function(req, res) {
+    const id = req.user.user_id
+    for (var key in req.body) {
+        const value = req.body[key]
+        query = "INSERT INTO add_det_emp VALUES(?,?,?)"
+        await db.query(query, [key, id, value])
+
+    }
+
 }
