@@ -5,8 +5,7 @@ const bcrypt = require('bcryptjs');
 db = new database()
 
 exports.login = async function(req, res) {
-    user_id = req.
-    body.user_id
+    user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
 
@@ -29,7 +28,7 @@ exports.login = async function(req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('employee/home.ejs', { title: "Employee Home" })
+            res.render('employee/home.ejs', { title: "Employee Home", id:user_id})
             return
         } else {
             res.send({
