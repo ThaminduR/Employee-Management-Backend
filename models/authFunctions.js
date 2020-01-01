@@ -89,17 +89,20 @@ exports.loggedin = function (req, res, next) {
                 }
                 if (user.user_type == "sm") {
                     res.render("sm/home", {
-                        title: "Second Management User"
+                        title: "Second Management User",
+                        id:user.user_id
                     })
                 }
                 if (user.user_type == "sup") {
                     res.render("sup/home", {
-                        title: "Supervisor User"
+                        title: "Supervisor User",
+                        id:user.user_id
                     })
                 }
                 if (user.user_type == "nm") {
                     res.render("employee/home", {
-                        title: "User"
+                        title: "User",
+                        id:user.user_id
                     })
                 }
             }

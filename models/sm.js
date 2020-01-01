@@ -506,3 +506,16 @@ exports.getEmpdat = async function (req, res) {
         console.log(error)
     }
 }
+
+exports.addDet = async function(req, res) {
+    query = "SELECT * FROM additional_details"
+    try {
+        results = await db.query(query)
+        res.render('sm/additional.ejs', { title: "Add Additional Information", results: results })
+    } catch (error) {
+
+    }
+}
+
+
+//SELECT e_id as Employee_Id, custom_attr as Custom_Attribute, value as Value FROM add_det_emp JOIN additional_details ON id=add_id
