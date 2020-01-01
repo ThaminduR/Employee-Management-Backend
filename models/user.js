@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken')
 db = new database()
 
 exports.login = async function (req, res) {
-    user_id = req.body.user_id
+    user_id = req.
+    body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
 
@@ -79,6 +80,8 @@ exports.saveEmDet = async function (req, res) {
         console.log(error)
     }
 }
+
+//request a leave
 exports.reqLeave = async function (req, res) {
     type = req.body.leavetype
     detail = req.body.detail
@@ -89,10 +92,12 @@ exports.reqLeave = async function (req, res) {
 
     try {
         await db.query(query, [id, type, detail, date])
+        res.redirect('/')
     } catch (error) {
         console.log(error)
     }
 }
+
 
 
 exports.saveDepInfo = async function (req, res) {

@@ -1,0 +1,55 @@
+
+<%- include('../partial/header') -%>
+<%- include('sidebar') -%>
+
+<div class="main">
+    <input type="text" id="input" placeholder="Enter Employee Id">
+    <button onclick=search() >Search</button>
+
+    <br></br>
+    <br></br>
+
+    <div id="placeholder"></div>
+    
+
+</div>
+    </body>
+
+<script>
+
+function search(){
+    var id = document.getElementById("input").value;
+
+    var output = "<table class='table table-hovered'><thead class='thead-dark'><tr><th scope='col'>ID</th>"
+    output += "<th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Marital Status</th>"
+    output+= "<th scope='col'>Birthday</th><th scope='col'>Address</th><th scope='col'>Contact Num</th><th scope='col'>Department</th>"
+    output+= "<th scope='col'>Job</th><th scope='col'>Type</th><th scope='col'>Pay Grade</th>"
+    output += "</tr></thead><tbody>"
+
+    $.ajax({
+                type: 'POST',
+                url: 'search',
+                data: {
+                    "id": id
+                },
+                success: function (result) {
+                    console.log(result)
+                    output += "<td>"+result.id+"</td>"
+                    output += "<td>"+result.firstname+"</td>"
+                    output += "<td>"+result.lastname+"</td>"
+                    output += "<td>"+result.marital_status+"</td>"
+                    output += "<td>"+result.birthday+"</td>"
+                    output += "<td>"+result.address+"</td>"
+                    output += "<td>"+result.contact_num+"</td>"
+                    output += "<td>"+result.name+"</td>"
+                    output += "<td>"+result.type+"</td>"
+                    output += "<td>"+result.title+"</td>"
+                    output += "<td>"+result.paygrade_name+"</td>"
+                    document.getElementById("placeholder").innerHTML=output;
+                }
+            });
+}
+
+</script>
+
+</html>

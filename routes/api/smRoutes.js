@@ -66,4 +66,15 @@ router.get('/userPay', auth.authTokenSM, (req, res) => {
 router.get('/addcontact', auth.authTokenSM, (req, res) => {
     res.render('employee/emform.ejs', { title: "Add Emergency Detail" })
 })
+
+router.get('/search', auth.authTokenSM, (req, res) => {
+    res.render('sm/search', {
+        title: "Search"
+    })
+})
+
+router.post('/search', auth.authTokenSM, (req, res) => {
+    SecM.searchId(req, res)
+})
+
 module.exports = router

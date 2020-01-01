@@ -46,7 +46,12 @@
                             <label for="contact_num">
                                 Contact Num 
                             </label>
-                            <input type="text"  class="col-md-3 form-control" id="contact_num" name="contact_num" required autocomplete="off" />
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">+94</span>
+                                </div>
+                                <input type="text"  class="col-md-3 form-control" id="contact_num" name="contact_num" placeholder="7XXXXXXXX" required autocomplete="off" />
+                            </div>
                         </div>
                         
                         <!-- Selects Start Here -->
@@ -70,7 +75,7 @@
                                     <select class="custom-select d-block w-100" name="job_title" required>
                                         <option value="" selected disabled hidden>Choose here</option>
                                         <option value="Manager">Manager</option>
-                                        <option value="Employee">Employee</option>
+                                        
                                     </select>
                                 </div>
                                 <p></p>
@@ -91,11 +96,6 @@
                                     <select class="custom-select d-block w-100" name="emp_status" required>
                                         <option value="" selected disabled hidden>Choose here</option>
                                         <option value="Permanent">Permanent</option>
-                                        <option value="Contract full-time">Contract full time</option>
-                                        <option value="Contract part-time">Contract part time</option>
-                                        <option value="Intern full-time">Intern full time</option>
-                                        <option value="Intern part-time">Intern part time</option>
-                                        <option value="Frelance">Freelance</option>
                                     </select>
 
                                 </div>
@@ -103,24 +103,28 @@
                             </div>
                         </div>
 
-                        <!-- Password Comment -->
-                        <div id="password-comment1"></div>
-                        <div id="password-comment2"></div>
+                        
 
                         <div class="field-wrap form-group">
                             <label for="password">
                                 Set A Password
                             </label>
+
+                            <!-- Password Comment -->
+                            <div id="password-comment1" class="alert-danger col-md-3"></div>
+                            <div id="password-comment2" class="alert-success col-md-3"></div>
                             <input type="password" class="col-md-3 form-control" id="password" name='password' required autocomplete="off" />
                         </div>
 
-                        <!-- Password Match Comment -->
-                        <div id="con-password-comment"></div>
+    
 
                         <div class="field-wrap form-group">
                             <label for="con-password">
                                 Confirm Password
                             </label>
+
+                            <!-- Password Match Comment -->
+                            <div id="con-password-comment" class="alert-danger col-md-3"></div>
                             <input type="password" class="col-md-3 form-control" id="con-password" name='con-password' required autocomplete="off" />
                         </div>
                         <br>
@@ -131,7 +135,57 @@
         </div>
     </div>
 </div> <!-- /form -->
-<script src="/views/admin/password-match.js"></script>
+<script>
+let password;
+
+let passwordCommenter = function (){
+
+    let divi = document.querySelector("#password");
+    divi.addEventListener("input",function(text){
+        password = text.target.value;
+        if(text.target.value.length<8){
+            document.querySelector("#password-comment1").innerHTML="";
+            document.querySelector("#password-comment2").innerHTML="";
+            const comment = document.createElement('p');
+            comment.textContent="Weak Password";
+            document.querySelector("#password-comment1").appendChild(comment);
+            
+        }
+        else{
+            document.querySelector("#password-comment1").innerHTML="";
+            document.querySelector("#password-comment2").innerHTML="";
+            const comment = document.createElement('p');
+            comment.textContent="Strong Password";
+            document.querySelector("#password-comment2").appendChild(comment);
+            
+        }
+        
+    })
+}
+
+let passwordConfirmChecker = function (){
+
+    let condivi = document.querySelector("#con-password");
+    condivi.addEventListener("change",function(text){
+        let conpassword = text.target.value;
+        if(conpassword != password){
+            document.querySelector("#con-password-comment").innerHTML="";
+            const comment = document.createElement('p');
+            comment.textContent="Passwords do not match";
+            document.querySelector("#con-password-comment").appendChild(comment);
+            
+        }
+        else{
+            document.querySelector("#con-password-comment").innerHTML="";
+
+        }
+        
+    })
+}
+
+passwordCommenter();
+passwordConfirmChecker();
+</script>
 </body>
 
 </html>
