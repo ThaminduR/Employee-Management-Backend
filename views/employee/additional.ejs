@@ -6,21 +6,26 @@
                     Add Additional Information
                 </div>
             <hr>
+                <div class="row">
+                    <div class="col-md-4" style="margin-left: 0.5%;">
 
-            <% if (results.length > 0) {%>
-            <form action="/api/user/additionaldet" method="post">
-                    
-                <% results.forEach(function(result, index){ %>
-                <p><%=result.custom_attr%></p>
-                <input name="<%=result.id%>" ></input>
-                <% }) %>
-            
-            <button type='submit' class="btn btn-primary button btn-block" >Submit</button>
-            </form>
-                <% } else { %>
-                    <p class="text-center">No custom attr found.</p>
-                <% } %>
+                        <% if (results.length > 0) {%>
+                        <form action="/api/user/additionaldet" method="post">
+                            <div class="form-group">  
+                                <% results.forEach(function(result, index){ %>
+                                <label><%=result.custom_attr%></label>
+                                <input name="<%=result.id%>" class="form-control"></input>
+                                <% }) %>
+                            </div> 
+                            <button type='submit' class="btn btn-primary" >Submit</button>
+                        </form>
 
+                        
+                            <% } else { %>
+                                <p class="text-center">No custom attr found.</p>
+                            <% } %>
+                    </div>
+                </div>
             </div>
 
         </body>
