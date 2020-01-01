@@ -1,10 +1,8 @@
 const database = require('../config/db')
 const jwt = require('jsonwebtoken')
-
+const bcrypt = require('bcryptjs');
 
 db = new database()
-
-
 
 exports.getSM = async function (res) {
     query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
@@ -70,7 +68,8 @@ exports.registerSM = async function (req, res) {
     birthday = req.body.birthday
     address = req.body.address
     contact_num = req.body.contact_num
-    h_password = req.body.password
+    password = req.body.password
+    h_password = bcrypt.hashSync(password, 10);
 
     user_ = [id, firstname, lastname, marital_status, birthday, address, contact_num, j_id, p_id, status_id, D_id, h_password]
 
@@ -127,9 +126,8 @@ exports.login = async function (req, res) {
         return
     }
     if (results.length > 0) {
-
-        if (results[0].h_password == password) {
-
+        hash = await bcrypt.compare(password, results[0].h_password)
+        if (hash) {
             user = {
                 user_id: user_id,
                 user_type: "admin"
@@ -177,7 +175,7 @@ exports.getOrg = async function (res) {
         details = await db.query(query)
         res.render('admin/organization_details', {
             details: details,
-            title:"Organization Details"
+            title: "Organization Details"
         })
     } catch (error) {
         console.log(error)
