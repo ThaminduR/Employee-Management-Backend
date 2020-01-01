@@ -20,6 +20,10 @@ router.get('/requestleave', auth.authTokenUser, (req, res) => {
     res.render('employee/leave.ejs', { title: "Request Leave" })
 })
 
+router.post('/reqleave', auth.authTokenUser, (req, res) => {
+    User.reqLeave(req,res)
+})
+
 
 router.post('/saveEmDet', auth.authTokenUser, (req, res) => {
     User.saveEmDet(req, res)

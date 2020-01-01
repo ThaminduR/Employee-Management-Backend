@@ -93,6 +93,7 @@ exports.reqLeave = async function (req, res) {
     try {
         await db.query(query, [id, type, detail, date])
         res.redirect('/')
+        //console.log("Test")
     } catch (error) {
         console.log(error)
     }
