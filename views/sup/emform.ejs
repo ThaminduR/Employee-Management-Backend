@@ -1,0 +1,26 @@
+ <%- include('../partial/header') -%>
+     <%- include('sidebar') -%>
+
+        <div class="main">
+        <b><h1 style="font-size:xx-large;"></h1></b>
+            <h2> Add Emergency Contact</h2>
+            <form action="/api/sm/saveEmDet" method="post">
+                        <div class="form-group">
+                            <div class="field-wrap">
+                                <label for="id-input" class="sr-only">Full Name</label>
+                                <input type="text" name='fullname' class="form-control" placeholder="Name" id="name-input" required autocomplete="off" required autofocus />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="field-wrap">
+                                <label for="pass-input" class="sr-only"> Contact Number
+                                </label>
+                                <input type="text" name='contactnum' class="form-control" placeholder="Contact Number" id="num-input" required autocomplete="off" required />
+                            </div>
+                        </div>
+                        <button type=submit class="btn btn-primary button btn-block" >Submit</button>
+            </form>
+        </div>
+
+        </body>
+        </html>
