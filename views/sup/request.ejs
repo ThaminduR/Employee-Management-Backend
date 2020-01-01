@@ -1,0 +1,59 @@
+<%- include('../partial/header') -%>
+<%- include('sidebar') -%>
+
+<div class="container-fluid">
+    <div class="table-wrapper main">
+    <span>Pending Leave Requests are Displayed Here</span>
+    <br></br>
+        <% if (requests.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+        
+                        <th scope="col">Status</th>
+                        <th scope="col">Leave ID</th>
+                        <th scope="col">Leave Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        
+                        <th scope="col"></th>
+        
+                    </tr>
+                </thead>
+                <tbody>
+                <% requests.forEach(function(request, index){ %>
+                    <tr>
+                        <th scope="row"><%= request.e_id %></th>
+                        <td><%= request.status %></td>
+                        <td><%= request.leave_id %></td>
+                        <td><%= request.leavetype %></td>
+                        <td><%= request.date %></td>
+                        <td><%= request.description %></td>
+                        <td><button class="btn btn-outline-warning" id="addbutton" onClick=addE("<%= user.id %>")>Add to me</button></td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+            <p class="text-center">No users found.</p>
+            <% } %>
+    </div>
+</div>
+// <script>
+//         function addE(id){
+//             $.ajax({
+//                 type: 'POST',
+//                 url: 'addEtoS',
+//                 data: {
+//                     "id": id
+//                 },
+//                 success: function (result) {
+//                     //location.reload();
+//                 }
+//             });
+//         }
+// </script>
+</body>
+
+</html>
