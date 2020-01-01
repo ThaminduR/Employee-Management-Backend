@@ -12,8 +12,31 @@ router.post('/addEtoS', auth.authTokenSup, (req, res) => {
     Sup.addEtoS(req, res)
 })
 
+<<<<<<< HEAD
 router.get('/requested', auth.authTokenUser, (req, res) => {
     Sup.getReqLeaves(req,res)
+=======
+//to add emergency contacts
+router.get('/addcontact', auth.authTokenSup, (req, res) => {
+    res.render('sup/emform.ejs', { title: "Add Emergency Detail" })
+})
+
+//route to check info
+router.get('/checkinfo', auth.authTokenSup, (req, res) => {
+    Sup.getEmpdat(req, res)
+})
+
+//route to add dependant info
+router.get('/adddependant', auth.authTokenSup, (req, res) => {
+    res.render('sup/depform.ejs', { title: "Add Dependant Information" })
+})
+
+router.post('/saveDepInfo', auth.authTokenSup, (req, res) => {
+    Sup.saveDepInfo(req, res)
+})
+router.get('/viewLeaves', auth.authTokenUser, (req, res) => {
+    res.render('sup/requests.ejs', { title: "Requested Leaves" })
+>>>>>>> 06f5e94a243a8205ab479376db497fb83ffa524b
 })
 
 module.exports = router
