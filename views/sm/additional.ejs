@@ -1,9 +1,11 @@
  <%- include('../partial/header') -%>
      <%- include('sidebar') -%>
 
-        <div class="main">
-        <b><h1 style="font-size:xx-large;"></h1></b>
-            <h2> Add Additional Information</h2>
+        <div class="main container-fluid">
+            <div class="alert text-lg-left">
+                Add Additional Information
+            </div>
+        <hr>
 
             <% if (results.length > 0) {%>
             <form action="/api/sm/additionaldet" method="post">
@@ -16,10 +18,10 @@
             <button type=submit class="btn btn-primary button btn-block" >Submit</button>
             </form>
                 <% } else { %>
-                    <p class="text-center">No custom attr found.</p>
+                    <p class="text-center">No custom attributes found.</p>
                 <% } %>
 
             
-
+        </div>
         </body>
         </html>
