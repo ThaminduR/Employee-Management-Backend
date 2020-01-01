@@ -192,7 +192,7 @@ exports.checkLeave = async function(req,res) {
         var results=[result1,result2,result3,result4]
         res.render('employee/checkleave.ejs', {
             title: "Remaining Leaves",
-            results=results
+            result=results
 
         })
     } catch (error) {
