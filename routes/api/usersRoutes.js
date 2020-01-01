@@ -9,7 +9,7 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/checkinfo', auth.authTokenUser, (req, res) => {
-    User.getEmpdat(res, res)
+    User.getEmpdat(req, res)
 })
 
 router.get('/addcontact', auth.authTokenUser, (req, res) => {
@@ -25,7 +25,7 @@ router.get('/checkleave', auth.authTokenUser, (req, res) => {
 })
 
 router.post('/reqleave', auth.authTokenUser, (req, res) => {
-    User.reqLeave(req,res)
+    User.reqLeave(req, res)
 })
 
 
