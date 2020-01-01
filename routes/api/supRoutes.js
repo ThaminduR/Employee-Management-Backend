@@ -54,7 +54,8 @@ router.post('/additionaldet', auth.authTokenSup, (req, res) => {
     User.adddetdb(req, res)
 })
 router.get('/additionaldet', auth.authTokenSup, (req, res) => {
-    User.addDet(req, res)
+    Sup.addDet(req, res)
 })
 
+router.get('/emp_un')
 module.exports = router

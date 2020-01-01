@@ -79,7 +79,7 @@ exports.login = async function(req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('sup/home.ejs', { title: "Home" })
+            res.render('sup/home.ejs', { title: "Supervisor User" })
             return
         } else {
             res.send({
@@ -180,5 +180,15 @@ exports.decline = async function (req, res) {
         res.redirect('/')
     } catch (error) {
         console.log(error)
+    }
+}
+
+exports.addDet = async function(req, res) {
+    query = "SELECT * FROM additional_details"
+    try {
+        results = await db.query(query)
+        res.render('sup/additional.ejs', { title: "Add Additional Information", results: results })
+    } catch (error) {
+
     }
 }

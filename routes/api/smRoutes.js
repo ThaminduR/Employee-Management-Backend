@@ -93,11 +93,14 @@ router.post('/search', auth.authTokenSM, (req, res) => {
 })
 
 router.get('/additionaldet', auth.authTokenSM, (req, res) => {
-    User.addDet(req, res)
+    SecM.addDet(req, res)
 })
 
 router.post('/additionaldet', auth.authTokenSM, (req, res) => {
     User.adddetdb(req, res)
 })
 
+router.post('/saveEmDet', auth.authTokenSM, (req, res) => {
+    User.saveEmDet(req, res)
+})
 module.exports = router
