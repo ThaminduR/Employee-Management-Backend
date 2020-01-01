@@ -74,4 +74,8 @@ router.get('/organization', auth.authTokenAdmin, (req, res) => {
 router.get('/userLeaves', auth.authTokenAdmin, (req, res) => {
     SecM.user_leave(res)
 })
+
+router.get('/userCustom',auth.authTokenAdmin,(req,res)=>{
+    SecM.user_custom(res)
+})
 module.exports = router
