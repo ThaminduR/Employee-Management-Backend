@@ -22,7 +22,7 @@ router.get('/requestleave', auth.authTokenUser, (req, res) => {
 
 
 
-router.post('/checkleave', auth.authTokenUser, (req, res) => {
+router.get('/checkleave', auth.authTokenUser, (req, res) => {
     User.checkLeave(req, res)
 })
 

@@ -146,7 +146,7 @@ exports.addDet = async function(req, res) {
     query = "SELECT * FROM additional_details"
     try {
         results = await db.query(query)
-        res.render('user/additional.ejs', { title: "Add Additional Information", results: results })
+        res.render('employee/additional.ejs', { title: "Add Additional Information", results: results })
     } catch (error) {
 
     }
@@ -183,20 +183,15 @@ exports.adddetdb = async function(req, res) {
 exports.checkLeave = async function(req,res) {
     const id=req.user.user_id
     query = "SELECT count_leaves(?,?) AS count_leaves" 
-    console.log("HHHH")
-
     try {
-        console.log("TTTTTTTTTT")
         result1 = await db.query(query,[id,"Annual"])
         result2 = await db.query(query,[id,"Casual"])
         result3 = await db.query(query,[id,"Maternity"])
         result4 = await db.query(query,[id,"No Pay"])
          result =[result1,result2,result3,result4]
-        console.log(result )
         res.render('employee/checkleave.ejs', {
             title: "Remaining Leaves",
             result:result
-
         })
     } catch (error) {
         console.log(error)
