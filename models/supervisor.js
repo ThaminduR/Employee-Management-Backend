@@ -76,12 +76,15 @@ exports.login = async function (req, res) {
 exports.getReqLeaves = async function(req, res) {
     user_id = req.body.user_id;
     query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM employee_requestedleaves WHERE s_id=?'
+    console.log("Test")
     try {
         result = await db.query(query, [user_id]);
         res.render('sup/requests.ejs', {
             title: "Requests",
             requests: result
+            
         })
+        
     } catch (error) {
         console.log(error)
     }
