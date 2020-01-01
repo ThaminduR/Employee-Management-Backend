@@ -79,7 +79,7 @@ exports.login = async function (req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('sup/home.ejs', { title: "Supervisor User" })
+            res.render('sup/home.ejs', { title: "Supervisor User", id:user_id })
             return
         } else {
             res.send({
