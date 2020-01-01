@@ -95,7 +95,7 @@ exports.getReqLeaves = async function(req, res) {
 
     user_id = req.user.user_id;
 
-    query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM employee_requestedleaves WHERE s_id=?'
+    query = 'SELECT e_id,status,leave_id,leavetype,date,description FROM requestedleaves WHERE s_id=?'
 
     try {
         result = await db.query(query, [user_id]);

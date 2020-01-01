@@ -16,7 +16,7 @@
                 <% sups.forEach(function(sup, index){ %>
                     <tr>
                         <th scope="row"><%= sup.e_id %></th>
-                        <td><button class="btn btn-outline" id="addbutton" onClick=addSup("<%= sup.e_id %>")>Add</button></td>
+                        <td><button class="btn btn-outline-primary" id="addbutton" onClick=addSup("<%= sup.e_id %>")>Add</button></td>
                     </tr>
                     <% }) %>
                 </tbody>
