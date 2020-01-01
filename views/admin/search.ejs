@@ -2,9 +2,20 @@
 <%- include('../partial/header') -%>
 <%- include('sidebar') -%>
 
+<br>
 <div class="main">
-    <input type="text" id="input" placeholder="Enter Employee Id">
-    <button onclick=search() >Search</button>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <input type="text" id="input" placeholder="Enter Employee Id" class="form-control">
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+            <button class="btn btn-success" onclick=search() >Search</button>
+        </div>
+    </div>   
+    
 
     <br></br>
     <br></br>
