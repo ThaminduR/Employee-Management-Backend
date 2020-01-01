@@ -382,6 +382,18 @@ exports.user_pay = async function(res) {
     }
 }
 
+exports.user_leave = async function(res) {
+    query = 'SELECT id as Employee_ID ,count(e_id) as Count FROM taken GROUP BY id'
+
+    try {
+        result = await db.query(query)
+        res.render('report/userPay', { PayGs: result })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 exports.searchId = async function(req, res) {
     query = "SELECT * FROM employee_details WHERE id = ?"
     id = req.body.id
