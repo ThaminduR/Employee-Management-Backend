@@ -6,7 +6,7 @@ db = new database()
 
 
 
-exports.getSM = async function(res) {
+exports.getSM = async function (res) {
     query = "SELECT * FROM employee JOIN admin_user WHERE admin_user.u_id=employee.id ORDER BY id ASC"
 
     try {
@@ -21,7 +21,7 @@ exports.getSM = async function(res) {
     }
 }
 
-exports.registerSM = async function(req, res) {
+exports.registerSM = async function (req, res) {
 
     first_name = req.body.first_name
     last_name = req.body.last_name
@@ -82,12 +82,12 @@ exports.registerSM = async function(req, res) {
         res.redirect('/')
     } catch (error) {
         console.log(error)
-        
+
 
     }
 }
 
-exports.removeSM = async function(req, res) {
+exports.removeSM = async function (req, res) {
     user_id = req.body.id
     query = 'CALL remove_sm(?)'
     try {
@@ -112,7 +112,7 @@ exports.searchId = async function (req, res) {
 }
 
 
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM admin_details WHERE id = ?'
@@ -136,7 +136,7 @@ exports.login = async function(req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-                //res.render('admin/adminHome.ejs', { title: "Admin Home" })
+            //res.render('admin/adminHome.ejs', { title: "Admin Home" })
             res.redirect('/')
             return
         } else {
@@ -156,7 +156,7 @@ exports.login = async function(req, res) {
 
 
 //to add custom fields to databse
-exports.addcustom = async function(req, res) {
+exports.addcustom = async function (req, res) {
     id = req.body.id
     attribute = req.body.attribute
 
@@ -165,6 +165,20 @@ exports.addcustom = async function(req, res) {
     try {
         await db.query(query, [id, attribute])
         res.redirect('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.getOrg = async function (res) {
+    query = "SELECT * FROM organization_details"
+
+    try {
+        details = await db.query(query)
+        res.render('admin/organization_details', {
+            details: details,
+            title:"Organization Details"
+        })
     } catch (error) {
         console.log(error)
     }
