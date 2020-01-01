@@ -7,9 +7,16 @@
        <form action="/api/user/reqLeave" method="post">
                    <div class="form-group">
                        <div class="field-wrap"></label>
-                           <input type="text" name='leavetype' class="form-control" placeholder="Leave Type" id="type-input" required autocomplete="off" required autofocus />
-                       </div>
+                        <select class="custom-select d-block w-100" id="leavetype" name="leavetype" required>
+                            <option value="" selected disabled hidden>Choose Leave Type</option>
+                            <option value="Annual">Annual</option>
+                            <option value="Casual">Casual</option>
+                            <option value="Maternity">Maternity</option>
+                            <option value="No Pay">No Pay</option>
+                        </select>
+        
                    </div>
+                   <br>
                    <div class="form-group">
                        <div class="field-wrap">
                            <label for="pass-input" class="sr-only"> Leave Detail
@@ -21,7 +28,7 @@
                     <div class="field-wrap">
                         <label for="pass-input" class="sr-only">Leave Date
                         </label>
-                        <input type="text" name='leavedate' class="form-control" placeholder="Leave Date DD/MM/YYYY" id="date-input" required autocomplete="off" required />
+                        <input type="text" name='leavedate' class="form-control" placeholder="Leave Date YYYY-MM-DD" id="date-input" required autocomplete="off" required />
                     </div>
                 </div>
                    <button type=submit class="btn btn-primary button btn-block" >Submit</button>

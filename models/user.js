@@ -87,18 +87,53 @@ exports.reqLeave = async function (req, res) {
     detail = req.body.detail
     date = req.body.leavedate
     id = req.user.user_id
+    leave_id = "LEV00001"
 
-    query = "INSERT INTO requested VALUES (?,?,?,?)"
+    query1 = 'SELECT leave_id FROM leaves ORDER BY leave_id DESC LIMIT 1'
 
     try {
-        await db.query(query, [id, type, detail, date])
+        result = await db.query(query1)
+        console.log("Test")
+        if (result.length > 0) {
+            str = result[0].leave_id;
+            temp_str = str.slice(3);
+            n = parseInt(temp_str) + 1;
+            length = n.toString().length;
+            temp_id = str.slice(0, -length);
+            leave_id = temp_id + n.toString();
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+   
+
+    query = "CALL request_leave(?,?,?,?,?)"
+
+    try {
+        await db.query(query, [id,leave_id, type, detail, date])
         res.redirect('/')
-        //console.log("Test")
+        console.log("Test")
     } catch (error) {
         console.log(error)
     }
 }
 
+
+//Check leave status
+exports.checkLeave = async function (res) {
+    query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
+
+    try {
+        result = await db.query(query)
+        res.render('employee/info.ejs', {
+            title: "Employee Details",
+            users: result
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 exports.saveDepInfo = async function (req, res) {
