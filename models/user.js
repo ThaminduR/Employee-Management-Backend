@@ -112,10 +112,19 @@ exports.reqLeave = async function(req, res) {
 
 
     query = "CALL request_leave(?,?,?,?,?)"
+    query1 = "SELECT count_leaves(?,?) AS count_leaves"
+    result1 = await db.query(query1,[id,type])
+
 
     try {
+        if(result1>0){
         await db.query(query, [id, leave_id, type, detail, date])
         res.redirect('/')
+
+        }else{
+            
+        }
+
 
     } catch (error) {
         console.log(error)
