@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 db = new database()
 
-exports.login = async function(req, res) {
+exports.login = async function (req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -28,7 +28,7 @@ exports.login = async function(req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('employee/home.ejs', { title: "Employee Home", id:user_id})
+            res.render('employee/home.ejs', { title: "Employee Home", id: user_id })
             return
         } else {
             res.send({
@@ -45,14 +45,14 @@ exports.login = async function(req, res) {
     }
 }
 
-exports.logout = function(req, res) {
+exports.logout = function (req, res) {
     res.cookie('authtoken', { maxAge: Date.now() })
     res.redirect('/login')
 }
 
 //function to print employee data
 
-exports.getEmpdat = async function(req, res) {
+exports.getEmpdat = async function (req, res) {
     query = "SELECT * FROM employee_details WHERE id=?"
     id = req.user.user_id
     try {
@@ -68,7 +68,7 @@ exports.getEmpdat = async function(req, res) {
 
 
 //to save emergency details
-exports.saveEmDet = async function(req, res) {
+exports.saveEmDet = async function (req, res) {
     fullname = req.body.fullname
     contactnum = req.body.contactnum
     id = req.user.user_id
@@ -84,7 +84,7 @@ exports.saveEmDet = async function(req, res) {
 }
 
 //request a leave
-exports.reqLeave = async function(req, res) {
+exports.reqLeave = async function (req, res) {
     type = req.body.leavetype
     detail = req.body.detail
     date = req.body.leavedate
@@ -111,18 +111,13 @@ exports.reqLeave = async function(req, res) {
 
 
     query = "CALL request_leave(?,?,?,?,?)"
-    query1 = "SELECT count_leaves(?,?) AS count_leaves"
-    result1 = await db.query(query1,[id,type])
-
 
     try {
-        if(result1>0){
-        await db.query(query, [id, leave_id, type, detail, date])
-        res.redirect('/')
+        
+            await db.query(query, [id, leave_id, type, detail, date])
+            res.redirect('/')
 
-        }else{
-            
-        }
+        
 
 
     } catch (error) {
@@ -133,7 +128,7 @@ exports.reqLeave = async function(req, res) {
 
 
 
-exports.saveDepInfo = async function(req, res) {
+exports.saveDepInfo = async function (req, res) {
     fullname = req.body.fullname
     birthday = req.body.birthday
     relationship = req.body.relationship
@@ -150,7 +145,7 @@ exports.saveDepInfo = async function(req, res) {
     }
 }
 
-exports.addDet = async function(req, res) {
+exports.addDet = async function (req, res) {
     query = "SELECT * FROM additional_details"
     try {
         results = await db.query(query)
@@ -160,7 +155,7 @@ exports.addDet = async function(req, res) {
     }
 }
 
-exports.adddetdb = async function(req, res) {
+exports.adddetdb = async function (req, res) {
     const id = req.user.user_id
     for (var key in req.body) {
         const value = req.body[key]
@@ -188,18 +183,27 @@ exports.adddetdb = async function(req, res) {
     }
 }
 
-exports.checkLeave = async function(req,res) {
-    const id=req.user.user_id
-    query = "SELECT count_leaves(?,?) AS count_leaves" 
+exports.checkLeave = async function (req, res) {
+    const id = req.user.user_id
+    query = "SELECT count_leaves(?,?) AS count_leaves"
+    query1 = "SELECT leave_id,leavetype,date,description FROM leaves INNER JOIN taken ON leaves.leave_id=taken.l_id WHERE e_id=?"
+    query2 = "SELECT leave_id,leavetype,date,description FROM leaves INNER JOIN deleted ON leaves.leave_id=deleted.l_id WHERE e_id=?"
+    query3="SELECT leave_id,leavetype,date,description FROM leaves INNER JOIN requested ON leaves.leave_id=requested.l_id WHERE e_id=?"
     try {
-        result1 = await db.query(query,[id,"Annual"])
-        result2 = await db.query(query,[id,"Casual"])
-        result3 = await db.query(query,[id,"Maternity"])
-        result4 = await db.query(query,[id,"No Pay"])
-         result =[result1,result2,result3,result4]
+        result1 = await db.query(query, [id, "Annual"])
+        result2 = await db.query(query, [id, "Casual"])
+        result3 = await db.query(query, [id, "Maternity"])
+        result4 = await db.query(query, [id, "No Pay"])
+        result5 = await db.query(query1, [id])
+        result6 = await db.query(query2, [id])
+        result7= await db.query(query3, [id])
+
+        result = [result1, result2, result3, result4, result5, result6,result7]
+        console.log(result)
+
         res.render('employee/checkleave.ejs', {
             title: "Remaining Leaves",
-            result:result
+            result: result
         })
     } catch (error) {
         console.log(error)

@@ -37,7 +37,7 @@ exports.accept = async function (req, res) {
 
 
     leave_id = req.body.leave_id
-    id = req.user.user_id
+    id = req.body.e_id
     console.log(leave_id)
 
     query1 = " UPDATE leaves SET status='ACCEPTED' WHERE leave_id=?"
@@ -46,8 +46,9 @@ exports.accept = async function (req, res) {
 
     try {
         await db.query(query1, [leave_id])
-        await db.query(query2, [leave_id])
         await db.query(query3, [id, leave_id])
+        await db.query(query2, [leave_id])
+        
 
         res.redirect('/')
     } catch (error) {
@@ -169,13 +170,16 @@ exports.saveEmDet = async function (req, res) {
 exports.decline = async function (req, res) {
 
     leave_id = req.body.leave_id
+    id=req.body.e_id
     console.log(leave_id)
 
     query1 = " UPDATE leaves SET status='DECLINED' WHERE leave_id=?"
+    query3="INSERT INTO deleted VALUES(?,?)"
     query2 = "DELETE FROM requested WHERE l_id=?;"
 
     try {
         await db.query(query1, [leave_id])
+        await db.query(query3,[leave_id,id])
         await db.query(query2, [leave_id])
         res.redirect('/')
     } catch (error) {

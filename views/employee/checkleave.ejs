@@ -30,11 +30,93 @@
                    
                 </tbody>
             </table>
+            <br>
+            <p> Pending Leaves</p>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Leave ID</th>
+                        <th scope="col">Leave Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        
+                        <th scope="col"></th>
+        
+                    </tr>
+                </thead>
+                <% if(result[6]){ %>
+                <tbody>
+                <% result[6].forEach(function(leave, index){ %>
+                    <tr>
+                        <td><%= leave.leave_id %></td>
+                        <td><%= leave.leavetype %></td>
+                        <td><%= leave.date %></td>
+                        <td><%= leave.description %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+                <%} else {%>
+                <p> No Declined Leaves </p>
+                <%}%>
+            </table>
+            <br>
+            <p> Accepted Leaves</p>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Leave ID</th>
+                        <th scope="col">Leave Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        
+                        <th scope="col"></th>
+        
+                    </tr>
+                </thead>
+                <% if(result[4]){ %>
+                <tbody>
+                <% result[4].forEach(function(leave, index){ %>
+                    <tr>
+                        <td><%= leave.leave_id %></td>
+                        <td><%= leave.leavetype %></td>
+                        <td><%= leave.date %></td>
+                        <td><%= leave.description %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+                <%}%>
+            </table>
+
+            <br>
+            <p> Declined Leaves</p>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Leave ID</th>
+                        <th scope="col">Leave Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        
+                        <th scope="col"></th>
+        
+                    </tr>
+                </thead>
+                <% if(result[5]){ %>
+                <tbody>
+                <% result[5].forEach(function(leave, index){ %>
+                    <tr>
+                        <td><%= leave.leave_id %></td>
+                        <td><%= leave.leavetype %></td>
+                        <td><%= leave.date %></td>
+                        <td><%= leave.description %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+                <%}%>
+            </table>
             
     </div>
 </div>
-
-
 </body>
 
 </html>
