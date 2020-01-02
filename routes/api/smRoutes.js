@@ -108,4 +108,9 @@ router.post('/saveEmDet', auth.authTokenSM, (req, res) => {
 router.get('/userCustom', auth.authTokenSM, (req, res) => {
     SecM.user_custom(res)
 })
+router.get('/userLeaves', auth.authTokenSM, (req, res) => {
+    SecM.user_leave(res)
+})
+
+
 module.exports = router

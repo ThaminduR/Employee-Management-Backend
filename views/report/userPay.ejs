@@ -5,35 +5,40 @@
     </head>
     <body style="margin: 2em 5em 5em 5em; background-color: beige;">
         <div class="text-md-center">
-            <h1 class="h2">Employees by Pay Grade</h1>
+            <h1 class="h2">Leaves Taken</h1>
             <hr>
         </div>
         <a href="http://localhost:3000/" class="btn btn-outline-secondary"> Home </a>
         <br>
         <br>
         <div class="table-wrapper main">
-            <% if (PayGs.length > 0) {%>
             <table class="table table-hovered" border="1">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Pay Grade</th>
-                        <th scope="col">Employees</th>
-                        <th scope="col">Number of Employees</th>
+                        <th scope="col">Employee</th>
+                        <th scope="col">Leave ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Name</th>
+                        
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <% PayGs.forEach(function(pay, index){ %>
+                    <% leaves.forEach(function(leave, index){ %>
                     <tr>
-                        <td><%= pay.Pay_Grade %></td>
-                        <td><%= pay.Employees %></td>
-                        <td><%= pay.Count %></td>
+                        <td><%= leave.e_id %></td>
+                        <td><%= leave.leave_id %></td>
+                        <td><%= leave.type %></td>
+                        <td><%= leave.date %></td>
+                        <td><%= leave.description %></td>
+                        <td><%= leave.name %></td>
                         </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <% } else { %>
-            <p class="text-center">No records found.</p>
-            <% } %>
+           
         </div>
     <!-- JQuery and Popper -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

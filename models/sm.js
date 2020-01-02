@@ -383,11 +383,11 @@ exports.user_pay = async function(res) {
 }
 
 exports.user_leave = async function(res) {
-    query = 'SELECT id as Employee_ID ,count(e_id) as Count FROM taken GROUP BY id'
+    query = 'SELECT taken.e_id,leave_id,leavetype,date,description,name FROM taken JOIN leaves ON leaves.leave_id=taken.l_id JOIN works ON works.e_id=taken.e_id JOIN department ON department.d_id=works.d_id'
 
     try {
         result = await db.query(query)
-        res.render('report/userPay', { PayGs: result })
+        res.render('report/userPay', { leaves: result })
     } catch (error) {
         console.log(error)
     }
