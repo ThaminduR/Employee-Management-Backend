@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 db = new database()
 
-exports.getNEmp = async function (res) {
+exports.getNEmp = async function(res) {
     query = "SELECT * FROM employee_details WHERE id NOT IN (SELECT u_id FROM admin_user) AND id NOT IN (SELECT s_id FROM supervises) ORDER BY id ASC"
 
     try {
@@ -20,7 +20,7 @@ exports.getNEmp = async function (res) {
 
 
 
-exports.editEM = async function (req, res) {
+exports.editEM = async function(req, res) {
     user_id = req.body.id
 
     query = "SELECT * FROM employee WHERE id=?"
@@ -184,7 +184,7 @@ exports.editEM = async function (req, res) {
     res.redirect('./')
 }
 
-exports.registerEM = async function (req, res) {
+exports.registerEM = async function(req, res) {
 
     first_name = req.body.first_name
     last_name = req.body.last_name
@@ -269,7 +269,7 @@ exports.registerEM = async function (req, res) {
 
 
 
-exports.editEMView = async function (req, res) {
+exports.editEMView = async function(req, res) {
     user_id = req.query.id
     res.render('sm/editEM.ejs', {
         title: "Edit Employee",
@@ -280,7 +280,7 @@ exports.editEMView = async function (req, res) {
 
 
 
-exports.removeEM = async function (req, res) {
+exports.removeEM = async function(req, res) {
     user_id = req.body.id
     query = 'CALL remove_em(?)'
     try {
@@ -294,7 +294,7 @@ exports.removeEM = async function (req, res) {
 
 
 
-exports.getsupervisors = async function (res) {
+exports.getsupervisors = async function(res) {
     query = "SELECT * FROM employee WHERE id IN (SELECT sup_id FROM supervisors) ORDER BY id ASC"
 
     try {
@@ -308,7 +308,7 @@ exports.getsupervisors = async function (res) {
     }
 }
 
-exports.viewaddsupervisors = async function (res) {
+exports.viewaddsupervisors = async function(res) {
     query = "SELECT e_id FROM employee_job WHERE j_id = 1 AND e_id NOT IN (SELECT sup_id FROM supervisors) AND e_id NOT IN (SELECT u_id FROM admin_user)"
 
     try {
@@ -322,7 +322,7 @@ exports.viewaddsupervisors = async function (res) {
     }
 }
 
-exports.addsupervisors = async function (req, res) {
+exports.addsupervisors = async function(req, res) {
     sup_id = req.body.id
     user_id = req.user.user_id
     query = "INSERT INTO supervisors VALUES (?,?)"
@@ -335,7 +335,7 @@ exports.addsupervisors = async function (req, res) {
     }
 }
 
-exports.removeSup = async function (req, res) {
+exports.removeSup = async function(req, res) {
     user_id = req.body.id
     query = 'DELETE FROM supervisors WHERE sup_id = ?'
     try {
@@ -349,7 +349,7 @@ exports.removeSup = async function (req, res) {
 }
 
 
-exports.user_dept = async function (res) {
+exports.user_dept = async function(res) {
     query = "SELECT name as Department, GROUP_CONCAT(e_id) as Employees, count(e_id) as Count FROM employee_department GROUP BY name"
 
     try {
@@ -360,7 +360,7 @@ exports.user_dept = async function (res) {
     }
 }
 
-exports.user_job = async function (res) {
+exports.user_job = async function(res) {
     query = 'SELECT title as Job, GROUP_CONCAT(e_id) as Employees, count(e_id) as Count FROM employee_jobtitle GROUP BY title'
 
     try {
@@ -371,7 +371,7 @@ exports.user_job = async function (res) {
     }
 }
 
-exports.user_pay = async function (res) {
+exports.user_pay = async function(res) {
     query = 'SELECT paygrade_name as Pay_Grade , GROUP_CONCAT(e_id) as Employees, count(e_id) as Count FROM employee_paygrade GROUP BY paygrade_name'
 
     try {
@@ -382,7 +382,7 @@ exports.user_pay = async function (res) {
     }
 }
 
-exports.user_leave = async function (res) {
+exports.user_leave = async function(res) {
     query = 'SELECT id as Employee_ID ,count(e_id) as Count FROM taken GROUP BY id'
 
     try {
@@ -394,7 +394,7 @@ exports.user_leave = async function (res) {
 }
 
 
-exports.searchId = async function (req, res) {
+exports.searchId = async function(req, res) {
     query = "SELECT * FROM employee_details WHERE id = ?"
     id = req.body.id
     try {
@@ -405,7 +405,7 @@ exports.searchId = async function (req, res) {
     }
 }
 
-exports.login = async function (req, res) {
+exports.login = async function(req, res) {
     user_id = req.body.user_id
     password = req.body.password
     query = 'SELECT * FROM login_details WHERE user_id = ?'
@@ -428,7 +428,7 @@ exports.login = async function (req, res) {
             }
             const accessToken = jwt.sign(user, process.env.SECRET)
             res.cookie("authtoken", accessToken)
-            res.render('sm/home.ejs', { title: "Second Management Home" })
+            res.render('sm/home.ejs', { title: "Second Management User", id:user_id })
             return
         } else {
             res.send({
@@ -447,7 +447,7 @@ exports.login = async function (req, res) {
 
 
 //get department info
-exports.getDept = function (res) {
+exports.getDept = function(res) {
     query = "SELECT * FROM department ORDER BY d_id ASC";
     db.query(query, (err, result) => {
         if (err) {
@@ -460,7 +460,7 @@ exports.getDept = function (res) {
     });
 }
 
-exports.saveEmDet = async function (req, res) {
+exports.saveEmDet = async function(req, res) {
     fullname = req.body.fullname
     contactnum = req.body.contactnum
     id = req.user.user_id
@@ -476,24 +476,24 @@ exports.saveEmDet = async function (req, res) {
 }
 
 //to save dependant info
-exports.saveDepInfo = async function (req, res) {
-    fullname = req.body.fullname
-    birthday = req.body.birthday
-    relationship = req.body.relationship
-    contactnum = req.body.contactnum
-    id = req.user.user_id
+exports.saveDepInfo = async function(req, res) {
+        fullname = req.body.fullname
+        birthday = req.body.birthday
+        relationship = req.body.relationship
+        contactnum = req.body.contactnum
+        id = req.user.user_id
 
-    query = "INSERT INTO dependent_info VALUES (?,?,?,?,?)"
+        query = "INSERT INTO dependent_info VALUES (?,?,?,?,?)"
 
-    try {
-        await db.query(query, [id, fullname, birthday, relationship, contactnum])
-        res.redirect('/')
-    } catch (error) {
-        console.log(error)
+        try {
+            await db.query(query, [id, fullname, birthday, relationship, contactnum])
+            res.redirect('/')
+        } catch (error) {
+            console.log(error)
+        }
     }
-}
-//to get second management user info
-exports.getEmpdat = async function (req, res) {
+    //to get second management user info
+exports.getEmpdat = async function(req, res) {
     query = "SELECT * FROM employee_details WHERE id=?"
     id = req.user.user_id
     try {
@@ -517,5 +517,13 @@ exports.addDet = async function(req, res) {
     }
 }
 
+exports.user_custom = async function(res) {
+    query = 'SELECT e_id as Employee_Id, custom_attr as Custom_Attribute, value as Value FROM add_det_emp JOIN additional_details ON id=add_id'
 
-//SELECT e_id as Employee_Id, custom_attr as Custom_Attribute, value as Value FROM add_det_emp JOIN additional_details ON id=add_id
+    try {
+        result = await db.query(query)
+        res.render('report/customfields', { fields: result })
+    } catch (error) {
+        console.log(error)
+    }
+}
