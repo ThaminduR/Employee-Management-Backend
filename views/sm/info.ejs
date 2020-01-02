@@ -1,7 +1,6 @@
 <%- include('../partial/header') -%>
 <%- include('sidebar') -%>
 
-<div class="container">
     <div class="table-wrapper main">
         <% if (user.length > 0) {%>
             <table class="table table-hovered">
@@ -47,7 +46,7 @@
             <p class="text-center">No users found.</p>
             <% } %>
     </div>
-</div>
+
 <script>
         function removeEM(id){
             $.ajax({
