@@ -95,7 +95,7 @@ exports.reqLeave = async function (req, res) {
 
     try {
         result = await db.query(query1)
-        console.log("Test")
+        
         if (result.length > 0) {
             str = result[0].leave_id;
             temp_str = str.slice(3);
@@ -199,7 +199,7 @@ exports.checkLeave = async function (req, res) {
         result7= await db.query(query3, [id])
 
         result = [result1, result2, result3, result4, result5, result6,result7]
-        console.log(result)
+        
 
         res.render('employee/checkleave.ejs', {
             title: "Remaining Leaves",

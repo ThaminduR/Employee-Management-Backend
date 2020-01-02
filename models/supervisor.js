@@ -38,7 +38,7 @@ exports.accept = async function (req, res) {
 
     leave_id = req.body.leave_id
     id = req.body.e_id
-    console.log(leave_id)
+    
 
     query1 = " UPDATE leaves SET status='ACCEPTED' WHERE leave_id=?"
     query2 = "DELETE FROM requested WHERE l_id=?;"
